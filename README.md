@@ -38,7 +38,12 @@ You clone the repo into Muse
      USCIS Data Hub); proven sponsors first; no-history + no-signal
      companies skipped when better options exist
   -> For each job, per day (cap: 50-75):
-       read JD -> Draft 1 -> Review A (ATS recruiter) -> Draft 2
+       read JD -> Draft 1 (keep EVERY section from the uploaded base resume:
+       Projects, Publications, Awards, whatever the candidate included — never
+       drop a section; order sections by experience: under 3 yrs =
+       Summary, Education, Projects, Skills, Experience; 3+ yrs =
+       Summary, Experience, Skills, Projects, Education)
+       -> Review A (ATS recruiter) -> Draft 2
        -> Review B (hiring manager) -> Draft 3
        -> Review C (peer engineer) -> Review D (executive 6-second skim)
        -> Review E (HR red-flag screen) -> Review F (AI-voice detector)
