@@ -4,6 +4,32 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.2.0 — 2026-10-06
+
+Resumes now adapt to the candidate, and the repo keeps itself current.
+
+### Added
+- **Section preservation.** Every section in the uploaded base resume —
+  Projects, Publications, Awards, Certifications, whatever the candidate
+  included — is carried into every tailored resume. No section is ever
+  dropped. Each preserved section is JD-tailored (reorder entries,
+  emphasize JD keywords) under the same truth boundary: nothing invented.
+- **Experience-based section ordering.** Section order adapts to the
+  candidate's years of professional experience, strongest credential first:
+  under 3 years → Summary, Education, Projects, Skills, Experience;
+  3+ years → Summary, Experience, Skills, Projects, Education. Remaining
+  base sections keep their original relative order after these.
+- **Auto-update check.** Every run now starts by checking whether the local
+  copy is behind the latest GitHub release — if it is, the agent updates
+  first, then runs the pipeline. Users always run the newest rules with no
+  manual update step.
+
+### Changed
+- **One-page fit rule.** All sections are kept; space is made by trimming
+  bullets inside the least JD-relevant entries, never by deleting a section.
+
+---
+
 ## v2.1.0 — 2026-10-03
 
 The loop grows a seventh reviewer and the whole pipeline gets stricter:

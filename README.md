@@ -30,6 +30,7 @@ your personal data.
 
 ```
 You clone the repo into Muse
+  -> Muse checks for updates first (git pull — always runs the latest release)
   -> Muse asks you to upload your base resume (first run only)
   -> Muse extracts every role from it: titles, employers, dates, skills
   -> Muse searches jobs matching those roles: posted 60 min – 7 days ago,
@@ -59,8 +60,10 @@ You clone the repo into Muse
 After loading this repo into Muse, paste this one prompt — it covers
 onboarding, role extraction, and the apply loop:
 
-> I just loaded the applyforge repo — all files, beginning to end. Run the
-> full pipeline. First, onboard me: ask for my base resume, extract every
+> I just loaded the applyforge repo — all files, beginning to end. Before
+> anything else, check whether this copy is behind the latest release at
+> https://github.com/forgephantom/applyforge — if it is, update it first
+> (git pull or equivalent), then run the full pipeline. First, onboard me: ask for my base resume, extract every
 > role from it (titles, employers, dates, skills), and ask where my Google
 > Drive job_resumes folder is — remember it as OUT_BASE. Then find jobs
 > matching my roles that were posted between 60 minutes and 7 days ago.
