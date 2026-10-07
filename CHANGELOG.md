@@ -4,6 +4,17 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.2.1 — 2026-10-06
+
+### Fixed
+- **Resume_Section_Spec.md** contradicted the v2.2.0 rules (it mandated a
+  fixed 8-section order with "do not reorder"). The spec now defines
+  section preservation (every base-resume section is kept) and the
+  experience-based ordering (<3 yrs vs 3+ yrs), matching the review-loop
+  skill and the README.
+
+---
+
 ## v2.2.0 — 2026-10-06
 
 Resumes now adapt to the candidate, and the repo keeps itself current.

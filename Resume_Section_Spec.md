@@ -27,10 +27,12 @@ These instructions must produce a good resume for anyone, regardless of:
   finance, operations, research, trades, executive leadership, creative fields,
   academia, non-profit, government, military. All get the same eight sections
   and the same rules; only the vocabulary changes.
-- **Seniority**: a two-year-out new graduate and a thirty-year veteran both use
-  this spec. Bullet counts shrink for less experience, skill categories shift,
-  and Projects becomes more prominent for early career, but section structure
-  does not change.
+- **Seniority**: section order adapts to years of professional experience
+  (strongest credential leads). Under 3 years: Summary, Education, Projects,
+  Skills, Experience. 3+ years: Summary, Experience, Skills, Projects,
+  Education. Bullet counts shrink for less experience and skill categories
+  shift, but every section from the person's base resume is preserved —
+  nothing is dropped for seniority.
 - **Career shape**: continuous employment, career breaks, self-employment,
   military-to-civilian transitions, non-linear paths, contract work,
   research, and industry moves all fit. Career breaks are handled honestly (see
@@ -59,22 +61,26 @@ rule, not a limit of the spec. Read the intent and adapt the vocabulary.
 
 ---
 
-## The eight sections, in order
+## Sections and their order
 
-Every resume produced by this system has these sections in this order, no others:
+Sections come from the candidate's own base resume: every section the person
+included — Projects, Publications, Awards, Certifications, whatever they
+uploaded — is preserved in the tailored resume. Never drop a section the
+candidate has. Never add sections the candidate does not have (no
+"Objective," no "References," no "Hobbies").
 
-1. Name
-2. Subtitle (one line of role framing)
-3. Contact line
-4. Summary
-5. Technical Skills
-6. Professional Experience
-7. Education & Certifications
-8. (Optional) Projects — only when the person has real projects to list
+Order the sections by the candidate's years of professional experience,
+strongest credential first:
 
-Do not add sections not on this list (no "Objective," no "References," no "Hobbies,"
-no "Awards" unless awards is what the person genuinely wants and has). Do not
-reorder them.
+- **Under 3 years:** Name, Subtitle, Contact line, Summary, Education,
+  Projects, Skills, Experience, then any remaining base sections in their
+  original relative order (Publications, Certifications, Awards...).
+- **3+ years:** Name, Subtitle, Contact line, Summary, Experience, Skills,
+  Projects, Education, then any remaining base sections in their original
+  relative order.
+
+One page stays binding under 10 years of experience: make space by trimming
+bullets inside the least JD-relevant entries, never by deleting a section.
 
 ---
 
@@ -386,9 +392,11 @@ only, no fabrication, no expired items, no pending items.
 
 ---
 
-## Section 8 (optional): Projects
+## Projects (when the base resume has them)
 
-Include only when the person has real projects worth listing, typically when:
+Projects are preserved from the candidate's base resume — never dropped.
+Placement follows the experience-based order (before Skills for under
+3 years, after Skills for 3+ years). Include the person's real projects:
 - They are early career and their project work is more relevant than their
   professional history.
 - They have specific project work (open source, side projects, GitHub repos) that
