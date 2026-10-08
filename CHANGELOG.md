@@ -4,6 +4,18 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.5.0 — 2026-10-07
+
+### Changed
+- **Job sourcing widened and automated.** Posting window is now 60 minutes
+  to 1 month (was 7 days); sources are LinkedIn first (main priority), then
+  company career portals, then other job sites; the search re-runs every 60
+  minutes and applying starts on its own. Geography is strictly USA-wide —
+  every listing must be US-based (remote, hybrid, or onsite anywhere in the
+  USA).
+
+---
+
 ## v2.4.0 — 2026-10-07
 
 ### Added

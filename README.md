@@ -33,8 +33,11 @@ You clone the repo into Muse
   -> Muse checks for updates first (git pull — always runs the latest release)
   -> Muse asks you to upload your base resume (first run only)
   -> Muse extracts every role from it: titles, employers, dates, skills
-  -> Muse searches jobs matching those roles: posted 60 min – 7 days ago,
-     LinkedIn first then other sites
+  -> Muse searches jobs matching those roles: posted 60 min – 1 month ago,
+     strictly USA-wide (remote, hybrid, or onsite anywhere in the USA);
+     LinkedIn first (main priority), then company career portals,
+     then other job sites
+  -> Auto-search runs every 60 minutes and applying starts on its own
   -> Sponsorship check per company: H-1B history lookup (h1bdata.info /
      USCIS Data Hub); proven sponsors first; no-history + no-signal
      companies skipped when better options exist

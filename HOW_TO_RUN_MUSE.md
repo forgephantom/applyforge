@@ -46,13 +46,16 @@ pinned toolchain, PDF conversion, and layout verification on its own.
 
 ## The standing rules Muse follows
 
-- **Job sourcing:** only jobs posted between 60 minutes and 7 days ago.
+- **Job sourcing:** only jobs posted between 60 minutes and 1 month ago,
+  strictly USA-wide — every listing must be US-based (remote, hybrid, or
+  onsite anywhere in the USA). **Auto-search:** the search runs every 60
+  minutes and applying starts automatically.
   **Sponsorship check before every application:** look up the company's H-1B
   history (h1bdata.info / USCIS H-1B Employer Data Hub) and prioritize
   proven sponsors; skip companies with no H-1B history and no sponsorship
   signal when better options exist. Work-authorization answers stay exactly
-  as they are — nothing gets misrepresented. Search LinkedIn first,
-  then other job sites.
+  as they are — nothing gets misrepresented. Search LinkedIn first (main
+  priority), then company career portals, then other job sites.
 - **First 2 applications:** approval twice each — once for the tailored
   resume, once for the filled application before submit.
 - **3rd application onward:** full autopilot, no approvals.
