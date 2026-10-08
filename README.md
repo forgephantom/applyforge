@@ -30,7 +30,8 @@ your personal data.
 
 ```
 You clone the repo into Muse
-  -> Muse checks for updates first (git pull — always runs the latest release)
+  -> Muse auto-syncs to the latest release first — always, with no manual
+     update step, ever
   -> Muse asks you to upload your base resume (first run only)
   -> Muse extracts every role from it: titles, employers, dates, skills
   -> Muse searches jobs matching those roles: posted 60 min – 1 month ago,
@@ -195,19 +196,12 @@ All you do:
    Then point Muse at the cloned folder (upload it, attach it, or open the
    folder in the desktop app).
 
-   > **Staying updated:** new releases land on GitHub as soon as they're
-   > cut. Easiest path — copy-paste this into Muse and it updates the repo
-   > for you, no terminal needed:
-   > ```
-   > Update my ApplyForge copy to the latest release from
-   > https://github.com/forgephantom/applyforge
-   > ```
-   > Prefer the terminal? One command from inside the folder does the same:
-   > ```bash
-   > cd applyforge && git pull
-   > ```
-   > (ZIP downloads have no update path — re-download, or clone once and
-   > update from then on.)
+   > **Staying updated:** fully automatic — every run starts by syncing
+   > your copy to the latest GitHub release before anything else runs. There
+   > is no manual update step; you never need to pull, re-download, or
+   > paste an update prompt. (ZIP downloads: syncing needs the git
+   > history, so prefer the one-time clone above — after that, updates are
+   > automatic.)
 
    **Or download the ZIP:** open
    [github.com/forgephantom/applyforge](https://github.com/forgephantom/applyforge),

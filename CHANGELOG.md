@@ -4,6 +4,16 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.6.1 — 2026-10-07
+
+### Changed
+- **Updates are now unconditionally automatic.** Every run syncs to the
+  latest GitHub release before anything else — the manual update path
+  (paste-an-update-prompt, `git pull`) is retired from the docs. Users
+  never update manually.
+
+---
+
 ## v2.6.0 — 2026-10-07
 
 ### Changed
