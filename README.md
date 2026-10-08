@@ -57,7 +57,8 @@ You clone the repo into Muse
        -> Review E (HR red-flag screen) -> Review F (AI-voice detector)
        -> unanimous interview vote (all seven reviewers)
        -> build DOCX -> PDF -> layout MATCH check (exactly 1 page)
-       -> fill application -> submit
+       -> fill application (upload the PDF resume ONLY on every portal —
+          never the DOCX) -> submit
        -> save resume + JD + application record to Google Drive
           (ONLY for jobs actually applied to; the rest is removed)
 ```
@@ -156,7 +157,8 @@ but not submitted is removed, never kept:
 ```
 <Your Drive>/job_resumes/<Company>/<YYYY-MM-DD>_<Role-Slug>/
   <First>_<Last>_Resume.pdf     (the file actually uploaded)
-  <First>_<Last>_Resume.docx    (spare copy)
+  <First>_<Last>_Resume.docx    (spare copy — filed in Drive, never uploaded
+                               to a portal)
   JD.md                         (the job description as posted)
   APPLICATION_FORM.md           (every question + the submitted answer)
 ```

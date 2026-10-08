@@ -4,6 +4,14 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.1 — 2026-10-07
+
+### Fixed
+- **PDF-only uploads.** Company portals receive the PDF resume only — the
+  DOCX is a spare copy filed in Drive, never uploaded.
+
+---
+
 ## v2.7.0 — 2026-10-07
 
 ### Changed

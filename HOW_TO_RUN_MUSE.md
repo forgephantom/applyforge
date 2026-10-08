@@ -37,7 +37,8 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   `soffice --headless --convert-to pdf`, and verifies with
   `python3 compare_layout.py ORIGINAL.pdf <new pdf>` until it prints MATCH —
   trimming words (never layout numbers) if sections run long.
-- **Apply + record.** Muse fills the application from your verified facts,
+- **Apply + record.** Muse fills the application from your verified facts
+  (uploading the PDF resume only — never the DOCX),
   submits (after your approval for the first 2), and files the full packet
   to Drive — only for jobs actually applied to; anything prepared but not
   submitted is removed.
