@@ -47,9 +47,10 @@ pinned toolchain, PDF conversion, and layout verification on its own.
 ## The standing rules Muse follows
 
 - **Job sourcing:** only jobs posted between 60 minutes and 1 month ago,
-  strictly USA-wide — every listing must be US-based (remote, hybrid, or
-  onsite anywhere in the USA). **Auto-search:** the search runs every 60
-  minutes and applying starts automatically.
+  strictly USA-wide and never narrowed to a single state — all 50 states;
+  every listing must be US-based (remote, hybrid, or onsite anywhere in the
+  USA). **Auto-search:** the search runs every 60 minutes and applying
+  starts automatically.
   **Sponsorship check before every application:** look up the company's H-1B
   history (h1bdata.info / USCIS H-1B Employer Data Hub) and prioritize
   proven sponsors; skip companies with no H-1B history and no sponsorship

@@ -4,6 +4,15 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.5.1 — 2026-10-07
+
+### Fixed
+- **Geography clarified:** the USA-wide rule now states explicitly that the
+  search is never narrowed to a single state — all 50 states, remote,
+  hybrid, or onsite anywhere in the USA.
+
+---
+
 ## v2.5.0 — 2026-10-07
 
 ### Changed

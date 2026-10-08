@@ -34,7 +34,8 @@ You clone the repo into Muse
   -> Muse asks you to upload your base resume (first run only)
   -> Muse extracts every role from it: titles, employers, dates, skills
   -> Muse searches jobs matching those roles: posted 60 min – 1 month ago,
-     strictly USA-wide (remote, hybrid, or onsite anywhere in the USA);
+     strictly USA-wide and never narrowed to a single state — all 50 states
+     (remote, hybrid, or onsite anywhere in the USA);
      LinkedIn first (main priority), then company career portals,
      then other job sites
   -> Auto-search runs every 60 minutes and applying starts on its own
