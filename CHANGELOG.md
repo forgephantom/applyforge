@@ -4,6 +4,20 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.4.0 — 2026-10-07
+
+### Added
+- **Intake section-coverage check.** During onboarding, the base resume is
+  compared against the sections expected for the candidate's experience
+  band (under 3 yrs: Summary, Education, Projects, Skills, Experience;
+  3+ yrs: Summary, Experience, Skills, Projects, Education). Every missing
+  section is reported plainly with why it matters, and the candidate gets
+  the chance to reupload a complete resume before the first build. Missing
+  sections are never invented — the gap stays reported as omitted until the
+  candidate supplies it.
+
+---
+
 ## v2.3.0 — 2026-10-07
 
 Zero-prompt start. Loading the repo is now the entire setup.

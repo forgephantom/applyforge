@@ -82,6 +82,26 @@ strongest credential first:
 One page stays binding under 10 years of experience: make space by trimming
 bullets inside the least JD-relevant entries, never by deleting a section.
 
+### Intake: section-coverage check (onboarding)
+
+Before the first tailored build, compare the uploaded base resume against
+the expected sections for the candidate's experience band:
+
+- **Under 3 years:** Summary, Education, Projects, Skills, Experience.
+- **3+ years:** Summary, Experience, Skills, Projects, Education.
+
+For every expected section the base resume does not have, tell the
+candidate plainly what's missing and why it matters for their band — e.g.
+"Your resume has no Projects section. With under 3 years of experience,
+Projects is where hiring managers look for proof of hands-on skill — add
+1-3 projects with what you built and the outcome, then reupload." Then give
+them the chance to reupload; proceed with the sections present only if they
+confirm they have nothing to add.
+
+Never invent a missing section's content. A missing section stays missing
+until the candidate supplies it — tailored resumes are built from real
+sections only, and the gap is reported as omitted, never filled in.
+
 ---
 
 ## Section 1: Name

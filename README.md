@@ -67,6 +67,8 @@ end, then starts onboarding automatically — no prompt to paste:
    `OUT_BASE`; every application packet is filed under it.
 4. Muse recommends connecting **Gmail** the same way, so it can verify
    application confirmations.
+5. Muse checks your resume's **section coverage** for your experience band
+   and tells you what's missing so you can reupload before the first build.
 
 Then it extracts every role from your resume and starts the apply loop. If
 Muse doesn't start on its own, just say **"start"** — that's the only
@@ -106,6 +108,11 @@ just answer:
    there.
 4. **Connect Gmail** (recommended): Muse app → Settings → Connectors →
    Gmail → Connect, so Muse can verify application confirmations.
+5. **Section-coverage check.** Muse compares your resume against the
+   sections expected for your experience band (under 3 yrs: Summary,
+   Education, Projects, Skills, Experience; 3+ yrs: Summary, Experience,
+   Skills, Projects, Education) and tells you what's missing so you can
+   reupload a complete resume before the first build.
 
 Nothing personal is written to local disk or to this repo.
 
