@@ -4,6 +4,18 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.6.0 — 2026-10-07
+
+### Changed
+- **Sponsorship gate is now strict.** Applications go ONLY to companies
+  that sponsor visas: the check pulls the company's H-1B record from the
+  USCIS H-1B Employer Data Hub (plus h1bdata.info) covering the last 5
+  years through the current year, and applies only with H-1B activity in
+  that window or an explicit sponsorship offer in the posting. The old
+  prioritize/skip-when-better-options-exist softness is gone.
+
+---
+
 ## v2.5.1 — 2026-10-07
 
 ### Fixed

@@ -39,9 +39,10 @@ You clone the repo into Muse
      LinkedIn first (main priority), then company career portals,
      then other job sites
   -> Auto-search runs every 60 minutes and applying starts on its own
-  -> Sponsorship check per company: H-1B history lookup (h1bdata.info /
-     USCIS Data Hub); proven sponsors first; no-history + no-signal
-     companies skipped when better options exist
+  -> Sponsorship check per company (strict): USCIS H-1B Employer Data Hub
+     record for the last 5 years through the current year (plus
+     site:h1bdata.info); apply ONLY to proven sponsors — everyone else
+     is skipped, no exceptions
   -> For each job, per day (cap: 50-75):
        read JD -> Draft 1 (keep EVERY section from the uploaded base resume:
        Projects, Publications, Awards, whatever the candidate included — never
@@ -80,18 +81,18 @@ trigger phrase, and the only thing you ever type to begin.
 
 ### Sponsorship check (before every application)
 
-Work-authorization disclosure is the top post-review rejection driver, so
-every run weights toward proven sponsors — **before** any resume is built:
+Apply ONLY to companies that sponsor visas — strictly. **Before** any
+resume is built:
 
-1. Look up the company's H-1B history: search `site:h1bdata.info
-   <Company>` or check the USCIS H-1B Employer Data Hub for recent
-   filings/approvals.
-2. Priority order: **(1)** companies with recent H-1B filings or an explicit
-   sponsorship offer; **(2)** companies with older or unclear history;
-   **(3)** skip companies with no H-1B history AND no sponsorship signal
-   when better options exist.
-3. Log the signal per application: proven sponsor / history unclear / no
-   history.
+1. Pull the company's H-1B record from the USCIS H-1B Employer Data Hub
+   (supplemented by `site:h1bdata.info <Company>`), covering the last 5
+   years through the current year: filings, approvals, and any explicit
+   sponsorship statement in the posting.
+2. **Apply only if** the company shows H-1B activity in that 5-year window
+   or the posting explicitly offers sponsorship. Any company without it is
+   skipped — no exceptions.
+3. Log the signal per application: proven sponsor (years active) / no
+   qualifying history — skipped.
 
 Your work-authorization answers stay exactly as they are — the check changes
 *which companies* get applications, never what you claim. Nothing is
