@@ -4,6 +4,16 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.0 — 2026-10-07
+
+### Changed
+- **Runs 24 hours, 50–70 applications per day.** The pipeline now runs
+  around the clock — job search re-runs every 60 minutes and applying
+  starts on its own — submitting a minimum of 50 and a maximum of 70
+  applications per day. (Was: up to 75/day with no 24-hour rule.)
+
+---
+
 ## v2.6.1 — 2026-10-07
 
 ### Changed

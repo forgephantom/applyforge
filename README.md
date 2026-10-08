@@ -1,7 +1,8 @@
 # ApplyForge (Meta Muse edition)
 
 ![zero prompt](https://img.shields.io/badge/run-zero%20prompt-blue)
-![auto-apply](https://img.shields.io/badge/auto--apply-up%20to%2075%2Fday-green)
+![auto-apply](https://img.shields.io/badge/auto--apply-50--70%2Fday-green)
+![runs 24 hours](https://img.shields.io/badge/runs-24%20hours-blue)
 ![runs on Muse](https://img.shields.io/badge/runs%20on-Meta%20Muse-purple)
 ![no installs](https://img.shields.io/badge/installs-none-orange)
 
@@ -9,8 +10,8 @@
 extracts your roles, finds matching jobs, and for every job runs your
 resume through a **seven-reviewer quality loop** (ATS recruiter, hiring
 manager, peer engineer, executive skim, HR red-flag screen, AI-voice
-detector, company lens) plus a final **interview vote** — then applies. Up to **50–75
-applications per day**, on autopilot from the 3rd application. Your files
+detector, company lens) plus a final **interview vote** — then applies. **50–70
+applications per day**, running 24 hours, on autopilot from the 3rd application. Your files
 live in **Google Drive**, never on local disk, and this repo never holds
 your personal data.
 
@@ -44,7 +45,7 @@ You clone the repo into Muse
      record for the last 5 years through the current year (plus
      site:h1bdata.info); apply ONLY to proven sponsors — everyone else
      is skipped, no exceptions
-  -> For each job, per day (cap: 50-75):
+  -> For each job: 50–70 applications per day, running 24 hours:
        read JD -> Draft 1 (keep EVERY section from the uploaded base resume:
        Projects, Publications, Awards, whatever the candidate included — never
        drop a section; order sections by experience: under 3 yrs =
@@ -136,13 +137,16 @@ and submits on its own. (Muse still never invents employers, titles, dates,
 metrics, tools, salary, or work-authorization facts, and still strips any
 number it cannot verify.)
 
-### Daily cap: 50–75 applications
+### Daily volume: 50–70 applications, 24 hours
+
+The pipeline runs around the clock: job search re-runs every 60 minutes,
+24 hours a day, and applying starts on its own. Each day it submits a
+minimum of 50 and a maximum of 70 applications.
 
 Each application is token-expensive: JD reading, multi-draft tailoring, two
-review passes, PDF build, layout verification, and form filling. Capping at
-**50–75 per day** keeps token usage sustainable while still running a serious
-volume. The single prompt above already includes the daily batch (`up to 60
-per day`) — adjust the number in the prompt any time.
+review passes, PDF build, layout verification, and form filling. The 50–70
+band keeps token usage sustainable while running serious volume, day and
+night.
 
 ### Google Drive, not local disk
 

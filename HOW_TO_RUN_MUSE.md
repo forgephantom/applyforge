@@ -62,9 +62,10 @@ pinned toolchain, PDF conversion, and layout verification on its own.
 - **First 2 applications:** approval twice each — once for the tailored
   resume, once for the filled application before submit.
 - **3rd application onward:** full autopilot, no approvals.
-- **Cap:** 50–75 applications per day (each one is token-heavy: JD reading,
-  multi-draft tailoring, six review passes + interview vote, build, verify,
-  form fill).
+- **Volume:** 50–70 applications per day (minimum 50), running 24 hours —
+  the search re-runs every 60 minutes and applying starts on its own. Each
+  one is token-heavy: JD reading, multi-draft tailoring, six review passes
+  + interview vote, build, verify, form fill.
 - **Honesty gate:** role titles, employers, dates, metrics, and skills must
   be real and defensible. Disputed numbers are stripped, never shipped.
 - **Drive, not local disk:** nothing personal is written to local disk or
