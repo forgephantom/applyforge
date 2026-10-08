@@ -4,6 +4,25 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.3.0 — 2026-10-07
+
+Zero-prompt start. Loading the repo is now the entire setup.
+
+### Added
+- **Auto-start onboarding.** Nothing to paste: once the repo is loaded,
+  Muse begins onboarding on its own — base-resume upload, Google Drive
+  connection, `OUT_BASE` selection, then role extraction and the apply
+  loop. "start" remains as the fallback trigger phrase.
+- **CONNECTORS.md.** Exact steps to connect Google Drive and Gmail from the
+  Muse app (Settings → Connectors), what each connection is used for, and
+  how to update or switch accounts later.
+
+### Changed
+- README and HOW_TO_RUN_MUSE.md rewritten around the zero-prompt flow; the
+  old single paste-prompt is retired.
+
+---
+
 ## v2.2.1 — 2026-10-06
 
 ### Fixed

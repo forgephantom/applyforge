@@ -1,11 +1,11 @@
 # How to Run This on Meta Muse
 
 Everything in this repo runs through **Meta Muse** — no installs, no setup
-commands, no other runner. You bring the repo into Muse, paste **one
-prompt**, and Muse runs the whole pipeline: resume intake, role extraction,
-job matching, tailored resumes, and applications.
+commands, no other runner, and **no prompt to paste**. You bring the repo
+into Muse and it starts on its own: resume intake, role extraction, job
+matching, tailored resumes, and applications.
 
-## The single prompt
+## No prompt — it starts itself
 
 1. Get Muse at [muse.ai](https://muse.ai) — iPhone (App Store), Android
    (Google Play), the Mac app, or the web app, which works on any OS
@@ -15,29 +15,13 @@ job matching, tailored resumes, and applications.
    https://github.com/forgephantom/applyforge.git`). Muse reads every file,
    beginning to end: the pipeline spec, the content rules, the layout
    engine, and this guide.
-3. Paste this one prompt:
+3. That's it — Muse begins onboarding automatically: base-resume upload,
+   Google Drive + Gmail connect (Muse app → Settings → Connectors — see
+   `CONNECTORS.md`), and your `OUT_BASE` folder. If it doesn't start on its
+   own, just say **"start"**.
 
-> I just loaded the applyforge repo — all files, beginning to end. Run the
-> full pipeline. First, onboard me: ask for my base resume, extract every
-> role from it (titles, employers, dates, skills), and ask where my Google
-> Drive job_resumes folder is — remember it as OUT_BASE. Then find jobs
-> matching my roles that were posted between 60 minutes and 7 days ago.
-> Before building a packet for a company, check its H-1B history
-> (h1bdata.info or the USCIS H-1B Employer Data Hub) and prioritize proven
-> sponsors; skip companies with no H-1B history and no sponsorship signal
-> when better options exist. Search LinkedIn first, then other job sites.
-> Apply to up to 60 per day. For my first 2 applications, show me the tailored resume and the filled application for
-> approval before submitting; from the 3rd application on, run on full
-> autopilot. Never invent employers, titles, dates, metrics, tools, salary,
-> or work-authorization facts — report anything unverifiable as omitted,
-> never added. Save to Drive ONLY the jobs actually applied to — each as a
-> packet (PDF + DOCX + JD + every question with its answer) under
-> <OUT_BASE>/<Company>/<YYYY-MM-DD>_<Role-Slug>/ — and remove anything
-> prepared but not submitted.
-
-That's it. Muse handles dependency setup (`docx@8.5.0`, `pymupdf`,
-`pypdf`), the pinned toolchain, PDF conversion, and layout verification
-on its own.
+Muse handles dependency setup (`docx@8.5.0`, `pymupdf`, `pypdf`), the
+pinned toolchain, PDF conversion, and layout verification on its own.
 
 ## What the prompt kicks off
 

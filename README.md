@@ -1,6 +1,6 @@
 # ApplyForge (Meta Muse edition)
 
-![one prompt](https://img.shields.io/badge/run-one%20prompt-blue)
+![zero prompt](https://img.shields.io/badge/run-zero%20prompt-blue)
 ![auto-apply](https://img.shields.io/badge/auto--apply-up%20to%2075%2Fday-green)
 ![runs on Muse](https://img.shields.io/badge/runs%20on-Meta%20Muse-purple)
 ![no installs](https://img.shields.io/badge/installs-none-orange)
@@ -14,10 +14,10 @@ applications per day**, on autopilot from the 3rd application. Your files
 live in **Google Drive**, never on local disk, and this repo never holds
 your personal data.
 
-> **One prompt runs everything.** Load this repo into Muse (it reads every
-> file, beginning to end), paste the single prompt in §1, and Muse runs the
-> whole pipeline — onboarding, role extraction, job matching, tailored
-> resumes, applications — with no further setup.
+> **No prompt runs everything.** Load this repo into Muse (it reads every
+> file, beginning to end) and it starts on its own — onboarding, role
+> extraction, job matching, tailored resumes, applications — with no setup
+> and nothing to paste. See §1.
 
 > **Privacy by design:** this repo ships a blank template only. Your name,
 > contact, employers, and metrics live in env vars and your Google Drive —
@@ -55,30 +55,22 @@ You clone the repo into Muse
           (ONLY for jobs actually applied to; the rest is removed)
 ```
 
-### The single prompt (runs everything)
+### Starting (no prompt needed)
 
-After loading this repo into Muse, paste this one prompt — it covers
-onboarding, role extraction, and the apply loop:
+Loading the repo is the entire setup. Muse reads every file, beginning to
+end, then starts onboarding automatically — no prompt to paste:
 
-> I just loaded the applyforge repo — all files, beginning to end. Before
-> anything else, check whether this copy is behind the latest release at
-> https://github.com/forgephantom/applyforge — if it is, update it first
-> (git pull or equivalent), then run the full pipeline. First, onboard me: ask for my base resume, extract every
-> role from it (titles, employers, dates, skills), and ask where my Google
-> Drive job_resumes folder is — remember it as OUT_BASE. Then find jobs
-> matching my roles that were posted between 60 minutes and 7 days ago.
-> Before building a packet for a company, check its H-1B history
-> (h1bdata.info or the USCIS H-1B Employer Data Hub) and prioritize proven
-> sponsors; skip companies with no H-1B history and no sponsorship signal
-> when better options exist. Search LinkedIn first, then other job sites.
-> Apply to up to 60 per day. For my first 2 applications, show me the tailored resume and the filled application for
-> approval before submitting; from the 3rd application on, run on full
-> autopilot. Never invent employers, titles, dates, metrics, tools, salary,
-> or work-authorization facts — report anything unverifiable as omitted,
-> never added. Save to Drive ONLY the jobs actually applied to — each as a
-> packet (PDF + DOCX + JD + every question with its answer) under
-> <OUT_BASE>/<Company>/<YYYY-MM-DD>_<Role-Slug>/ — and remove anything
-> prepared but not submitted.
+1. Muse asks you to **upload your base resume** (first run only).
+2. Muse asks you to **connect Google Drive**: Muse app → Settings →
+   Connectors → Google Drive → Connect. (See `CONNECTORS.md`.)
+3. Muse asks **where your Drive `job_resumes` folder is** — remembered as
+   `OUT_BASE`; every application packet is filed under it.
+4. Muse recommends connecting **Gmail** the same way, so it can verify
+   application confirmations.
+
+Then it extracts every role from your resume and starts the apply loop. If
+Muse doesn't start on its own, just say **"start"** — that's the only
+trigger phrase, and the only thing you ever type to begin.
 
 ### Sponsorship check (before every application)
 
@@ -101,17 +93,21 @@ misrepresented to pass it.
 
 ### First-run onboarding
 
-On the first run, Muse asks you to **upload your base resume**. From it,
-Muse extracts:
+On the first run, Muse walks you through four steps — nothing to paste,
+just answer:
 
-- every role: title, employer, start/end dates
-- skills and tools per role
-- education, certifications, contact details
+1. **Upload your base resume.** From it, Muse extracts every role (title,
+   employer, start/end dates), skills and tools per role, education,
+   certifications, and contact details.
+2. **Connect Google Drive.** Muse app → Settings → Connectors → Google
+   Drive → Connect. Full steps in `CONNECTORS.md`.
+3. **Point at your Drive folder** (e.g. your Drive's `job_resumes` folder).
+   That path becomes `OUT_BASE` — every application from then on is filed
+   there.
+4. **Connect Gmail** (recommended): Muse app → Settings → Connectors →
+   Gmail → Connect, so Muse can verify application confirmations.
 
-Muse also asks **where your Google Drive folder is** (e.g. your Drive's
-`job_resumes` folder). That path becomes `OUT_BASE` — every application from
-then on is filed there. Nothing personal is written to local disk or to this
-repo.
+Nothing personal is written to local disk or to this repo.
 
 ### Approval gates (first 2 only)
 
@@ -208,7 +204,8 @@ All you do:
    **Or grab a release:** tagged versions with changelogs live under
    [Releases](https://github.com/forgephantom/applyforge/releases) —
    download the source ZIP for the version you want.
-3. Paste the single prompt from §1.
+3. Done — Muse starts onboarding on its own: resume upload, Drive/Gmail
+   connect, `OUT_BASE`. If it doesn't start, just say **"start"**.
 
 Muse handles the rest, including installing the pinned dependencies
 (`docx@8.5.0`, `pymupdf`, `pypdf`) the first time it builds, and verifying
@@ -318,7 +315,8 @@ Why it is built this way:
 | `skills/jd-resume-review-loop/SKILL.md` | The seven-reviewer quality loop skill: the full review sequence, scoring rules, interview vote, and style bans. Load it into Muse (or any agent) to run the loop. |
 | `Resume_Section_Spec.md` | Content rules: sections, bullet template, honesty/ban rules. |
 | `compare_layout.py` | Layout verifier: `python3 compare_layout.py ORIG.pdf NEW.pdf`. |
-| `HOW_TO_RUN_MUSE.md` | Single-prompt quick guide: load the repo, paste one prompt, Muse runs everything. No installs. |
+| `HOW_TO_RUN_MUSE.md` | Zero-prompt quick guide: load the repo, Muse starts on its own. No installs. |
+| `CONNECTORS.md` | Connecting Google Drive and Gmail from the Muse app (Settings → Connectors), and switching accounts later. |
 | `package.json` / `requirements.txt` | Pinned deps. |
 
 ## 6. Troubleshooting
