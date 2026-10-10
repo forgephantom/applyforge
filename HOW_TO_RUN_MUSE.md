@@ -60,11 +60,14 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   else is skipped, no exceptions. Work-authorization answers stay exactly
   as they are — nothing gets misrepresented. Search LinkedIn first (main
   priority), then company career portals, then other job sites.
-- **Full autopilot, no approvals.** Every application goes straight through:
-  resume tailoring, form fill, and submit — never gate on approval, including
+- **First 2 applications:** approval twice each — once for the tailored
+  resume, once for the filled application before submit. This is the safety
+  default: the user sees exactly what goes out under their name before
+  autopilot begins.
+- **3rd application onward:** full autopilot, no approvals — including
   standard acknowledgement checkboxes (accuracy, assessment integrity, at-will
-  employment, privacy notices, codes of conduct). (User-directed: standing
-  auto-approval for all job-site actions.)
+  employment, privacy notices, codes of conduct). (Standing auto-approval for
+  all job-site actions once trust is established.)
 - **Volume:** 50 confirmed applications per day (minimum), running 24 hours —
   the search re-runs every 60 minutes and applying starts on its own. Each
   one is token-heavy: JD reading, multi-draft tailoring, six review passes

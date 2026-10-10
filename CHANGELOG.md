@@ -4,6 +4,16 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.3 — 2026-10-09
+
+### Fixed
+- **First-2 approval gate restored.** The first 2 applications require
+  approval twice each (tailored resume, then filled form before submit) as
+  the product safety default; full autopilot begins with the 3rd application.
+  (The v2.7.2 note retiring this rule was incorrect — it stays.)
+
+---
+
 ## v2.7.2 — 2026-10-09
 
 ### Added
