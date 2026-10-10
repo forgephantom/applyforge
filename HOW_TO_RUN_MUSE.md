@@ -87,6 +87,11 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   U.S.-person / export-control / ITAR questions before submitting — a JD
   text-fetch saying "clean" does not override a form-level question. If the
   form requires U.S.-person status the applicant does not hold, skip.
+- **Doubt rule (hard, user-directed 2026-10-09):** if there is ANY doubt
+  about a form answer — the verified facts do not clearly support it — do not
+  guess. Park the application, record the exact doubtful question, and ask the
+  user. A guessed answer is worse than a parked application; doubts get asked,
+  never answered by invention.
 - **Skip fast (user-directed 2026-10-09):** if an application needs input only
   the user can provide — OTP/verification code, sign-in, account creation,
   browser takeover, manual challenge, or an unknown fact — park it within 5

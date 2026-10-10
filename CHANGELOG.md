@@ -4,6 +4,16 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.4 — 2026-10-09
+
+### Added
+- **Doubt rule.** If there is any doubt about a form answer — the verified
+  facts do not clearly support it — the application is parked and the exact
+  doubtful question is asked of the user. Doubts get asked, never answered
+  by invention.
+
+---
+
 ## v2.7.3 — 2026-10-09
 
 ### Fixed
