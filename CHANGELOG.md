@@ -4,6 +4,28 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.2 — 2026-10-09
+
+### Added
+- **Screening-answer truth check.** Required "experience with X" form
+  questions are now cross-checked against the tailored resume's actual
+  content before answering: zero mentions plus a named review gap means the
+  answer is No, never Yes. (Lesson from a 2026-10-09 submission that answered
+  Yes without support.)
+- **Export-control form check.** The application form's own fields govern —
+  always read the form for U.S.-person / export-control / ITAR questions; a
+  JD text-fetch saying "clean" does not override a form-level question.
+- **Skip-fast rule.** Applications blocked on user-only input (OTP, sign-in,
+  account creation, takeover, unknown fact) are parked within 5 minutes so
+  blocked items never reduce the day's submission count.
+
+### Changed
+- **Full autopilot, no approvals.** The stale "first 2 applications need
+  approval" rule is retired — every application now goes straight through
+  tailoring, form fill, and submit under the user's standing auto-approval.
+
+---
+
 ## v2.7.1 — 2026-10-07
 
 ### Fixed

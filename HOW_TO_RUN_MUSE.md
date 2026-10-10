@@ -60,15 +60,36 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   else is skipped, no exceptions. Work-authorization answers stay exactly
   as they are — nothing gets misrepresented. Search LinkedIn first (main
   priority), then company career portals, then other job sites.
-- **First 2 applications:** approval twice each — once for the tailored
-  resume, once for the filled application before submit.
-- **3rd application onward:** full autopilot, no approvals.
-- **Volume:** 50–70 applications per day (minimum 50), running 24 hours —
+- **Full autopilot, no approvals.** Every application goes straight through:
+  resume tailoring, form fill, and submit — never gate on approval, including
+  standard acknowledgement checkboxes (accuracy, assessment integrity, at-will
+  employment, privacy notices, codes of conduct). (User-directed: standing
+  auto-approval for all job-site actions.)
+- **Volume:** 50 confirmed applications per day (minimum), running 24 hours —
   the search re-runs every 60 minutes and applying starts on its own. Each
   one is token-heavy: JD reading, multi-draft tailoring, six review passes
   + interview vote, build, verify, form fill.
 - **Honesty gate:** role titles, employers, dates, metrics, and skills must
   be real and defensible. Disputed numbers are stripped, never shipped.
+- **Screening-answer truth check (hard, 2026-10-09):** when a form asks a
+  required "experience with X" question, cross-check the answer against the
+  tailored resume's ACTUAL content before answering. If the resume has zero
+  mentions of X and the review summary names it as an honest gap, the answer
+  is No — never Yes from "general experience." A Yes on a screening question
+  is a factual claim about the applicant; it must be defensible in an
+  interview. When the truthful answer disqualifies, skip the application and
+  log why.
+- **Export-control form check (hard, 2026-10-09):** the application FORM's
+  questions govern, not the JD text. Always read the form's own fields for
+  U.S.-person / export-control / ITAR questions before submitting — a JD
+  text-fetch saying "clean" does not override a form-level question. If the
+  form requires U.S.-person status the applicant does not hold, skip.
+- **Skip fast (user-directed 2026-10-09):** if an application needs input only
+  the user can provide — OTP/verification code, sign-in, account creation,
+  browser takeover, manual challenge, or an unknown fact — park it within 5
+  minutes and move to the next role. Blocked applications never burn run time
+  and never reduce the day's count; they are retried once the user supplies
+  what is needed.
 - **Drive, not local disk:** nothing personal is written to local disk or
   to this repository. Only jobs actually applied to are saved to Drive —
   anything prepared but not submitted is removed.
