@@ -4,6 +4,31 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.8 — 2026-11-07
+
+### Added
+- **Onboarding asks location and relocation first.** Right after the base
+  resume upload, the pipeline asks current city/state, willingness to
+  relocate, and preferred locations — before any job search, because it
+  filters every role.
+- **Candidate details companies mainly ask.** Onboarding now collects the
+  fields that show up on almost every company form: name, email, phone,
+  location, LinkedIn/GitHub/portfolio, work authorization and sponsorship
+  need, citizenship, worked here before, know anyone here, how did you
+  hear about us, start-date availability, salary expectations, education,
+  and years of experience. Asked once, remembered, never stored in the
+  repo.
+- **Instant Drive updates.** The JD is written to Drive the moment it is
+  read, the tailored resume the moment it is built, and the filled form
+  the moment it is filled — each piece lands immediately, never batched
+  until submission. Filed pieces stay even if the application parks.
+
+### Changed
+- Onboarding order is now: base resume, location + relocation, full user
+  information, Drive connect, Drive folder, Gmail, section-coverage check.
+
+---
+
 ## v2.7.7 — 2026-11-07
 
 ### Added

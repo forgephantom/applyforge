@@ -34,6 +34,11 @@ You clone the repo into Muse
   -> Muse auto-syncs to the latest release first — always, with no manual
      update step, ever
   -> Muse asks you to upload your base resume (first run only)
+  -> Muse asks your location and relocation: current city/state, willing
+     to relocate, preferred locations if any
+  -> Muse asks the candidate details companies mainly ask on their forms
+     (see First-run onboarding) — asked once, remembered, never stored in
+     this repo
   -> Muse extracts every role from it: titles, employers, dates, skills
   -> Muse searches jobs matching those roles: posted 60 min – 1 month ago,
      strictly USA-wide and never narrowed to a single state — all 50 states
@@ -66,8 +71,10 @@ You clone the repo into Muse
        -> build DOCX -> PDF -> layout MATCH check (exactly 1 page)
        -> fill application (upload the PDF resume ONLY on every portal —
           never the DOCX) -> submit
-       -> save resume + JD + application record to Google Drive
-          (ONLY for jobs actually applied to; the rest is removed)
+       -> resume, JD, and filled form are each written to Google Drive
+          instantly, the moment they exist — never batched, never held
+          until submission; filed pieces stay even if the application
+          is later parked
 ```
 
 ### Starting (no prompt needed)
@@ -76,13 +83,17 @@ Loading the repo is the entire setup. Muse reads every file, beginning to
 end, then starts onboarding automatically — no prompt to paste:
 
 1. Muse asks you to **upload your base resume** (first run only).
-2. Muse asks you to **connect Google Drive**: Muse app → Settings →
+2. Muse asks your **location and relocation**: current city/state, willing
+   to relocate, preferred locations if any.
+3. Muse asks the **candidate details companies mainly ask** on their forms
+   (full list in First-run onboarding below). Asked once, remembered.
+4. Muse asks you to **connect Google Drive**: Muse app → Settings →
    Connectors → Google Drive → Connect. (See `CONNECTORS.md`.)
-3. Muse asks **where your Drive `job_resumes` folder is** — remembered as
+5. Muse asks **where your Drive `job_resumes` folder is** — remembered as
    `OUT_BASE`; every application packet is filed under it.
-4. Muse recommends connecting **Gmail** the same way, so it can verify
+6. Muse recommends connecting **Gmail** the same way, so it can verify
    application confirmations.
-5. Muse checks your resume's **section coverage** for your experience band
+7. Muse checks your resume's **section coverage** for your experience band
    and tells you what's missing so you can reupload before the first build.
 
 Then it extracts every role from your resume and starts the apply loop. If
@@ -152,20 +163,45 @@ others) runs the same pipeline and the same checks.
 
 ### First-run onboarding
 
-On the first run, Muse walks you through four steps — nothing to paste,
+On the first run, Muse walks you through six steps — nothing to paste,
 just answer:
 
 1. **Upload your base resume.** From it, Muse extracts every role (title,
    employer, start/end dates), skills and tools per role, education,
    certifications, and contact details.
-2. **Connect Google Drive.** Muse app → Settings → Connectors → Google
+2. **Location and relocation.** Current city and state, whether you are
+   willing to relocate, and preferred locations if any. This is asked
+   first, before any job search, because it filters every role.
+3. **Candidate details companies mainly ask.** The fields that show up on
+   almost every company application form, so the pipeline can fill any
+   form without inventing anything:
+   - Full name, email, phone
+   - Location: city, state, country (from step 2)
+   - LinkedIn profile URL, GitHub profile URL, portfolio or website URL
+     (if you have them)
+   - Work authorization: legally authorized to work in the US, and whether
+     you need sponsorship now or in the future
+   - Country of citizenship
+   - Have you worked for this company before
+   - Do you know / are you related to / were you referred by anyone at
+     this company
+   - How did you hear about us
+   - Earliest start date (how soon you can start)
+   - Salary expectations (a number, a range, or your rule for answering
+     when a range is posted)
+   - Willing to relocate, preferred locations (from step 2)
+   - Education: highest degree, school, graduation year
+   - Years of relevant experience
+   Asked once and remembered. Nothing personal is written to this repo or
+   to local disk.
+4. **Connect Google Drive.** Muse app → Settings → Connectors → Google
    Drive → Connect. Full steps in `CONNECTORS.md`.
-3. **Point at your Drive folder** (e.g. your Drive's `job_resumes` folder).
+5. **Point at your Drive folder** (e.g. your Drive's `job_resumes` folder).
    That path becomes `OUT_BASE` — every application from then on is filed
    there.
-4. **Connect Gmail** (recommended): Muse app → Settings → Connectors →
+6. **Connect Gmail** (recommended): Muse app → Settings → Connectors →
    Gmail → Connect, so Muse can verify application confirmations.
-5. **Section-coverage check.** Muse compares your resume against the
+7. **Section-coverage check.** Muse compares your resume against the
    sections expected for your experience band (under 3 yrs: Summary,
    Education, Projects, Skills, Experience; 3+ yrs: Summary, Experience,
    Skills, Projects, Education) and tells you what's missing so you can
@@ -200,8 +236,8 @@ night.
 
 ### Google Drive, not local disk
 
-Only jobs you actually applied to are filed in Drive — anything prepared
-but not submitted is removed, never kept:
+Every piece is written to Drive instantly, the moment it exists — never
+batched, never held until submission:
 
 ```
 <Your Drive>/job_resumes/<Company>/<YYYY-MM-DD>_<Role-Slug>/
@@ -211,6 +247,12 @@ but not submitted is removed, never kept:
   JD.md                         (the job description as posted)
   APPLICATION_FORM.md           (every question + the submitted answer)
 ```
+
+**Instant updates.** The JD is written to Drive the moment it is read, the
+tailored resume the moment it is built, and the filled form the moment it
+is filled — each piece lands in Drive immediately, before submission.
+Filed pieces stay even if the application is later parked or skipped; they
+are the record of what was prepared. Nothing is deleted to make room.
 
 Control the root with `OUT_BASE` (set during onboarding):
 
