@@ -4,6 +4,18 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.7 — 2026-11-07
+
+### Added
+- **Strict duplicate check across bots.** Before any resume is built, every
+  bot must check the shared Drive `job_resumes` record — if a packet for
+  that company + role already exists from ANY bot on ANY platform, the job
+  is skipped, no exceptions. One application per company + role, ever.
+  All bots must share the same Drive folder (same `OUT_BASE`) so they see
+  each other's applications.
+
+---
+
 ## v2.7.6 — 2026-11-07
 
 ### Added

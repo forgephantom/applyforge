@@ -48,6 +48,10 @@ You clone the repo into Muse
   -> Existing-employer check: skip any company that already appears as an
      employer in your uploaded base resume (current or past) — never apply
      to a current or former employer, no exceptions
+  -> Duplicate check across bots (strict): before any resume is built,
+     check the shared Drive job_resumes record — if a packet for this
+     company + role already exists (from ANY bot, on ANY platform), skip.
+     Never apply twice to the same company + role, no exceptions
   -> For each job: 50–70 applications per day, running 24 hours:
        read JD -> Draft 1 (keep EVERY section from the uploaded base resume:
        Projects, Publications, Awards, whatever the candidate included — never
@@ -115,6 +119,30 @@ any resume is built:
    exceptions, even if the role, location, or team is different. A new role
    at a former employer is still a former employer.
 3. Log the skip per application: existing employer — skipped.
+
+### Duplicate check across bots (strict)
+
+Different bots running this repo must never apply to the same job twice.
+**Before** any resume is built:
+
+1. **One shared record.** Every bot — Muse, Grok bot, Dots, Claude Duet,
+   or any other — must point at the SAME Drive `job_resumes` folder (same
+   `OUT_BASE`). That folder is the single record of what has been applied
+   to. A bot with its own separate folder cannot see other bots'
+   applications and will duplicate them.
+2. **Check before building.** For every job, search the shared folder for
+   an existing packet for that company + role
+   (`job_resumes/<Company>/<YYYY-MM-DD>_<Role-Slug>/`). If a packet
+   exists — from any bot, on any platform, on any day — **skip the job.
+   No exceptions.**
+3. **One application per company + role, ever.** Never re-apply to the
+   same company + role, even if the earlier application came from another
+   bot, another platform, or another day. Only the user can explicitly
+   order a re-application, and then it is a new decision, not an automatic
+   one.
+4. **File before moving on.** Every submitted application is filed in the
+   shared folder immediately after submitting, so the next bot — or the
+   next run — sees it. Never submit without filing.
 
 ### Agent-agnostic rules
 
