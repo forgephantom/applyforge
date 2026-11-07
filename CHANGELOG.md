@@ -4,6 +4,22 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.5 — 2026-11-07
+
+### Added
+- **Existing-employer rule.** Never apply to a company that already appears
+  as an employer in the uploaded base resume (current or past) — a new role
+  at a former employer is still skipped, no exceptions. Checked before any
+  resume is built, alongside the sponsorship check.
+- **Agent-agnostic rules.** The rules in this repo live in the repo itself,
+  not in any one app, so any AI agent that loads it (Muse, Grok bot, Dots,
+  Claude Duet, or others) runs the same pipeline and the same checks.
+- **No-impact rollout.** Existing users get this automatically on their next
+  run via the repo's auto-sync to the latest release — no action needed, and
+  no impact on existing packets, approvals, or Drive files.
+
+---
+
 ## v2.7.4 — 2026-10-09
 
 ### Added

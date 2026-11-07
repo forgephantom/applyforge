@@ -45,6 +45,9 @@ You clone the repo into Muse
      record for the last 5 years through the current year (plus
      site:h1bdata.info); apply ONLY to proven sponsors — everyone else
      is skipped, no exceptions
+  -> Existing-employer check: skip any company that already appears as an
+     employer in your uploaded base resume (current or past) — never apply
+     to a current or former employer, no exceptions
   -> For each job: 50–70 applications per day, running 24 hours:
        read JD -> Draft 1 (keep EVERY section from the uploaded base resume:
        Projects, Publications, Awards, whatever the candidate included — never
@@ -100,6 +103,24 @@ resume is built:
 Your work-authorization answers stay exactly as they are — the check changes
 *which companies* get applications, never what you claim. Nothing is
 misrepresented to pass it.
+
+### Existing-employer check (before every application)
+
+Never apply to a company you already work for or have worked for. **Before**
+any resume is built:
+
+1. Take the employer list from the Experience section of your uploaded base
+   resume — every current and past employer.
+2. **Skip any job whose company matches one of those employers** — no
+   exceptions, even if the role, location, or team is different. A new role
+   at a former employer is still a former employer.
+3. Log the skip per application: existing employer — skipped.
+
+### Agent-agnostic rules
+
+The rules in this repo live in the repo itself, not in any one app — any AI
+agent that loads the repo end to end (Muse, Grok bot, Dots, Claude Duet, or
+others) runs the same pipeline and the same checks.
 
 ### First-run onboarding
 
