@@ -1,9 +1,9 @@
-# ApplyForge (Meta Muse edition)
+# ApplyForge
 
 ![zero prompt](https://img.shields.io/badge/run-zero%20prompt-blue)
 ![auto-apply](https://img.shields.io/badge/auto--apply-50--70%2Fday-green)
 ![runs 24 hours](https://img.shields.io/badge/runs-24%20hours-blue)
-![runs on Muse](https://img.shields.io/badge/runs%20on-Meta%20Muse-purple)
+![runs on any agent](https://img.shields.io/badge/runs%20on-any%20agent-purple)
 ![no installs](https://img.shields.io/badge/installs-none-orange)
 
 **AI job-application autopilot.** Upload your base resume once — Muse
@@ -239,6 +239,39 @@ All you do:
    download the source ZIP for the version you want.
 3. Done — Muse starts onboarding on its own: resume upload, Drive/Gmail
    connect, `OUT_BASE`. If it doesn't start, just say **"start"**.
+
+### How to use on every platform — Muse, Grok bot, Dots, Claude Duet
+
+ApplyForge is a set of rules in this repo, not a feature of any one app.
+Any AI agent that can read these files end to end runs the same pipeline.
+The steps are the same on every platform:
+
+1. Give the agent this repo — clone it, upload the folder, or attach the
+   files, whichever the platform supports.
+2. Ask the agent to read every file, beginning to end.
+3. The agent starts onboarding on its own: upload your base resume, connect
+   Google Drive, point at your Drive `job_resumes` folder, connect Gmail.
+4. If it doesn't start, just say **"start"** — that's the only trigger
+   phrase, on every platform.
+
+Platform notes:
+
+- **Muse** — Get the app at [muse.ai](https://muse.ai) — iPhone (App Store),
+  Android (Google Play), the Mac app, or the web app. Clone the repo and
+  point Muse at the folder. Drive and Gmail connect from Settings →
+  Connectors. See `CONNECTORS.md`.
+- **Grok bot** — Load the repo files into Grok, ask it to read every file
+  beginning to end, then say **"start"**. Connect Drive and Gmail however
+  Grok supports them; the pipeline and the rules are unchanged.
+- **Dots** — Load the repo files into Dots, ask it to read every file
+  beginning to end, then say **"start"**. Same pipeline, same rules.
+- **Claude Duet** — Load the repo files into Claude Duet, ask it to read
+  every file beginning to end, then say **"start"**. Same pipeline, same
+  rules.
+
+Whatever the platform, the agent always syncs to the latest release first,
+so every user — new or existing — runs the current rules with no manual
+update and no impact on existing packets or approvals.
 
 Muse handles the rest, including installing the pinned dependencies
 (`docx@8.5.0`, `pymupdf`, `pypdf`) the first time it builds, and verifying

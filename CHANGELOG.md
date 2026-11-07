@@ -4,6 +4,19 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.6 — 2026-11-07
+
+### Added
+- **How to use on every platform.** New README section: the same
+  load-the-repo-and-say-"start" flow for Muse, Grok bot, Dots, and Claude
+  Duet — the pipeline and the rules are identical on each.
+
+### Changed
+- **Title is ApplyForge only.** Dropped the "(Meta Muse edition)" suffix and
+  the "runs on Meta Muse" badge; the repo is platform-neutral.
+
+---
+
 ## v2.7.5 — 2026-11-07
 
 ### Added
