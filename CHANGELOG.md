@@ -4,6 +4,26 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.7.9 — 2026-11-07
+
+### Added
+- **Smart form questions — answered correctly, no AI bluff words.**
+  Open-ended screening questions ("Why this role?", "Describe a project
+  where you...", "What makes you a good fit?") are answered only from the
+  verified fact base (base resume + onboarding answers), in plain human
+  writing: short sentences, plain words, no buzzwords from the ban list,
+  no em dashes, no semicolons, no smart quotes, no filler phrases, no
+  hedged filler. Every sentence must be defensible in an interview; if a
+  question cannot be answered from verified facts, it is parked (doubt
+  rule) instead of bluffed.
+
+### Fixed
+- **§3 step 11 now matches the instant-Drive rule.** It previously still
+  said unsubmitted material is removed; filed pieces stay even if the
+  application parks (v2.7.8).
+
+---
+
 ## v2.7.8 — 2026-11-07
 
 ### Added

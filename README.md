@@ -70,7 +70,9 @@ You clone the repo into Muse
        -> unanimous interview vote (all seven reviewers)
        -> build DOCX -> PDF -> layout MATCH check (exactly 1 page)
        -> fill application (upload the PDF resume ONLY on every portal —
-          never the DOCX) -> submit
+          never the DOCX) -> smart form questions answered only from
+          verified facts, in plain human writing — no AI bluff words
+          (see §3, Smart form questions) -> submit
        -> resume, JD, and filled form are each written to Google Drive
           instantly, the moment they exist — never batched, never held
           until submission; filed pieces stay even if the application
@@ -389,9 +391,35 @@ reviewers vote "interview"**:
     rebuilds until **MATCH** (identical spacing, exactly 1 page).
 11. **Apply + record** — fills the application from your verified facts,
     submits (after approval for the first 2), and saves the full packet
-    (PDF + DOCX + JD + every question/answer) to your Drive folder — only
-    for jobs actually applied to; anything prepared but not submitted is
-    removed.
+    (PDF + DOCX + JD + every question/answer) to your Drive folder.
+    Resume, JD, and form are each written instantly, the moment they exist
+    (see Instant updates); filed pieces stay even if the application is
+    later parked.
+
+### Smart form questions — answered correctly, no AI bluff words
+
+Application forms ask open-ended screening questions ("Why this role?",
+"Describe a project where you...", "What makes you a good fit?"). These
+are answered from the verified fact base only — the uploaded base resume
+plus the onboarding answers — and in plain human writing:
+
+1. **Correct first.** Every claim must trace to the resume or the
+   onboarding answers: a real employer, a real project, a real number. If
+   a question cannot be answered from verified facts, park it (doubt rule)
+   — never invent a story, a metric, or a skill to fill the box.
+2. **No AI bluff words.** No buzzwords from the ban list
+   (`Resume_Section_Spec.md`: leverage, seamless, robust, streamline,
+   spearhead, empower, holistic, synergy, utilize, foster, pivotal,
+   harness, world-class, best-in-class, state-of-the-art, cutting-edge,
+   passionate, results-driven, proven track record, next-gen,
+   game-changing, bleeding-edge, "responsible for"), no em dashes, no
+   semicolons in body text, no smart quotes, no filler phrases ("in order
+   to", "it is worth noting that", "at the end of the day", "the ability
+   to"), no hedged filler ("helped with", "was involved in"). Short
+   sentences, plain words, straight quotes only when truly needed.
+3. **Defensible in an interview.** Write every answer as if the
+   interviewer will ask you to prove it on the spot — because they will.
+   If you could not defend a sentence in an interview, do not write it.
 
 After a batch, Muse reports: all seven scores before/after, the interview
 vote, top 3 changes, JD coverage %, anything omitted, and every claim
