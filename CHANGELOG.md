@@ -4,6 +4,23 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.8.2 — 2026-11-11
+
+### Changed
+- **No review gates.** Muse never asks the user to review a packet,
+  resume, form, or upload before acting — no approval step, no review
+  step, for any task. It builds the tailored resume, mirrors it to
+  Drive, uploads the PDF resume to the portal, and submits
+  automatically, from the very first application. The old first-2
+  approval gate (resume approval, then submission approval) is
+  retired. The only things that ever come back to the user are the two
+  full-autopilot exceptions: vacations, and form questions where there
+  is genuine doubt about the truthful answer. Everything else from
+  v2.8.1 is unchanged (continuous parallel pipeline, firm minimum
+  5/hour, verification deadlock fix, full autopilot, all hard filters).
+
+---
+
 ## v2.8.1 — 2026-11-11
 
 ### Changed

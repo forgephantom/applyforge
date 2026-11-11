@@ -39,7 +39,7 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   trimming words (never layout numbers) if sections run long.
 - **Apply + record.** Muse fills the application from your verified facts
   (uploading the PDF resume only — never the DOCX),
-  submits (after your approval for the first 2), and files the full packet
+  submits automatically, no approval step, and files the full packet
   to Drive — only for jobs actually applied to; anything prepared but not
   submitted is removed.
 - **Daily report.** Roles submitted, JD coverage %, honestly omitted items,
@@ -60,14 +60,14 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   else is skipped, no exceptions. Work-authorization answers stay exactly
   as they are — nothing gets misrepresented. Search LinkedIn first (main
   priority), then company career portals, then other job sites.
-- **First 2 applications:** approval twice each — once for the tailored
-  resume, once for the filled application before submit. This is the safety
-  default: the user sees exactly what goes out under their name before
-  autopilot begins.
-- **3rd application onward:** full autopilot, no approvals — including
-  standard acknowledgement checkboxes (accuracy, assessment integrity, at-will
-  employment, privacy notices, codes of conduct). (Standing auto-approval for
-  all job-site actions once trust is established.)
+- **No review gates (v2.8.2):** Muse never asks you to review a packet,
+  resume, form, or upload before acting — no approval step, no review step,
+  for any task. It builds, mirrors to Drive, uploads the PDF, and submits
+  automatically, from the very first application. Full autopilot from the
+  start, including standard acknowledgement checkboxes (accuracy, assessment
+  integrity, at-will employment, privacy notices, codes of conduct). The
+  only things that ever come back to you are vacations, and form questions
+  where there is genuine doubt about the truthful answer.
 - **Volume:** 50 confirmed applications per day (minimum), running 24 hours —
   the search re-runs every 60 minutes and applying starts on its own. Each
   one is token-heavy: JD reading, multi-draft tailoring, six review passes

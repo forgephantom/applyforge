@@ -211,19 +211,18 @@ just answer:
 
 Nothing personal is written to local disk or to this repo.
 
-### Approval gates (first 2 only)
+### No review gates (v2.8.2)
 
-For your **first 2 applications**, Muse stops and asks for approval twice:
-
-1. **Resume approval** — Muse shows the tailored resume; you approve or ask
-   for changes.
-2. **Submission approval** — Muse shows the filled application (every field);
-   you approve before it submits.
-
-From the **3rd application onward, no approvals** — Muse tailors, verifies,
-and submits on its own. (Muse still never invents employers, titles, dates,
-metrics, tools, salary, or work-authorization facts, and still strips any
-number it cannot verify.)
+Muse never asks you to review a packet, resume, form, or upload before
+acting — no approval step, no review step, for any task. It builds the
+tailored resume, mirrors it to Drive, uploads the PDF to the portal, and
+submits automatically, from the very first application. (The old first-2
+approval gate — resume approval, then submission approval — is retired
+as of v2.8.2.) The only things that ever come back to you are the two
+full-autopilot exceptions: vacations, and form questions where there is
+genuine doubt about the truthful answer. (Muse still never invents
+employers, titles, dates, metrics, tools, salary, or work-authorization
+facts, and still strips any number it cannot verify.)
 
 ### Daily volume: minimum 5 applications per hour, continuous parallel pipeline
 
@@ -257,7 +256,7 @@ verification: verification is what fills the queue.** A coordinator that
 only hunts while the queue is empty deadlocks — it finds nothing new,
 verifies nothing, and submits nothing. Continuously: verify the queue,
 build each keeper the moment it verifies, submit it immediately —
-minimum 5 applications per hour (v2.8.1).
+minimum 5 applications per hour (v2.8.2).
 
 ### Google Drive, not local disk
 
@@ -413,7 +412,7 @@ reviewers vote "interview"**:
     section headers shifted or it spilled to 2 pages, Muse trims words and
     rebuilds until **MATCH** (identical spacing, exactly 1 page).
 11. **Apply + record** — fills the application from your verified facts,
-    submits (after approval for the first 2), and saves the full packet
+    submits automatically, no approval step, and saves the full packet
     (PDF + DOCX + JD + every question/answer) to your Drive folder.
     Resume, JD, and form are each written instantly, the moment they exist
     (see Instant updates); filed pieces stay even if the application is
