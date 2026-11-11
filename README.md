@@ -225,17 +225,24 @@ and submits on its own. (Muse still never invents employers, titles, dates,
 metrics, tools, salary, or work-authorization facts, and still strips any
 number it cannot verify.)
 
-### Daily volume: minimum 3–5 applications per hour, latest postings first
+### Daily volume: minimum 5 applications per hour, continuous parallel pipeline
 
-The pipeline runs around the clock and submits a minimum of 3–5
-applications every hour, all day. Every hour, agents run in parallel
-(hunters, verifiers, builders, appliers) to hit that hourly floor.
-Latest postings are hunted and submitted first — freshness wins; older
-live postings are used only to fill the hour when fresh roles run out.
+The pipeline runs around the clock and submits a minimum of 5
+applications every hour, all day. Hunt, verify, build, and apply run
+in parallel, continuously — never in sequence, never waiting. The
+moment a role is verified as a firm keeper, its packet is built and
+submitted immediately; the pipeline never waits until five keepers are
+collected and never waits for a "right time" in the hour. While one
+role is being built or applied, hunters and verifiers keep working the
+next roles in parallel. Each hour picks the top 5 roles (latest
+postings first); as soon as one is submitted, the next keeper in the
+queue takes its place. If more than 5 keepers are ready in an hour,
+the top 5 are submitted and the rest carry into the next hour's queue
+— the pipeline never idles.
 
 Each application is token-expensive: JD reading, multi-draft tailoring,
 two review passes, PDF build, layout verification, and form filling. The
-3–5 per hour floor keeps volume serious while staying sustainable, day
+5 per hour floor keeps volume serious while staying sustainable, day
 and night.
 
 ### Verification never waits for the queue (deadlock fix, v2.8.0)
@@ -248,8 +255,9 @@ batch every hour on the live-looking weak conditionals, even when the
 firm-keeper queue is empty. **The "queue empty" rule must never block
 verification: verification is what fills the queue.** A coordinator that
 only hunts while the queue is empty deadlocks — it finds nothing new,
-verifies nothing, and submits nothing. Every hour: verify the queue,
-build the keepers, submit 3–5.
+verifies nothing, and submits nothing. Continuously: verify the queue,
+build each keeper the moment it verifies, submit it immediately —
+minimum 5 applications per hour (v2.8.1).
 
 ### Google Drive, not local disk
 

@@ -4,6 +4,27 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.8.1 — 2026-11-11
+
+### Changed
+- **Continuous parallel pipeline — firm minimum 5 applications per hour.**
+  Hunt, verify, build, and apply now run in parallel, continuously,
+  never in sequence and never waiting. The moment a role is verified as
+  a firm keeper, its packet is built and submitted immediately; the
+  pipeline does not wait until five keepers are collected and does not
+  wait for a "right time" in the hour. While one role is being built or
+  applied, hunters and verifiers keep working the next roles in
+  parallel. Each hour picks the top 5 roles (latest postings first); as
+  soon as one is submitted, the next keeper in the queue takes its
+  place. If more than 5 keepers are ready in an hour, the top 5 are
+  submitted and the rest carry into the next hour's queue — the
+  pipeline never idles. This replaces the v2.8.0 "minimum 3–5 per
+  hour, 5 when the queue allows" floor with a firm minimum of 5 per
+  hour. The v2.8.0 verification deadlock fix, full autopilot, and all
+  hard filters are unchanged.
+
+---
+
 ## v2.8.0 — 2026-11-11
 
 ### Fixed
