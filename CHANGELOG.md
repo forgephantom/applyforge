@@ -4,6 +4,28 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.8.0 — 2026-11-11
+
+### Fixed
+- **Verification deadlock — the queue-empty rule no longer blocks verification.**
+  A weak conditional becomes a firm keeper only after a live-browser
+  check (own board, dated H-1B filings, experience band, sponsorship
+  language, coding share). The coordinator previously spawned no agents
+  when the firm-keeper queue was empty — but verification is what fills
+  the queue, so the pipeline deadlocked: it hunted, found nothing new,
+  verified nothing, and submitted nothing for days. The rule now reads:
+  run a verification batch every hour on the live-looking weak
+  conditionals, even when the firm-keeper queue is empty. Verification
+  never waits for the queue.
+
+### Changed
+- **Hourly throughput floor: minimum 3–5 applications per hour.**
+  The pipeline submits a minimum of 3–5 confirmed applications every
+  hour, all day. Latest postings are hunted and submitted first;
+  older live postings fill the hour only when fresh roles run out.
+
+---
+
 ## v2.7.9 — 2026-11-07
 
 ### Added

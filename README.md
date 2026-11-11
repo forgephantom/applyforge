@@ -225,16 +225,31 @@ and submits on its own. (Muse still never invents employers, titles, dates,
 metrics, tools, salary, or work-authorization facts, and still strips any
 number it cannot verify.)
 
-### Daily volume: 50–70 applications, 24 hours
+### Daily volume: minimum 3–5 applications per hour, latest postings first
 
-The pipeline runs around the clock: job search re-runs every 60 minutes,
-24 hours a day, and applying starts on its own. Each day it submits a
-minimum of 50 and a maximum of 70 applications.
+The pipeline runs around the clock and submits a minimum of 3–5
+applications every hour, all day. Every hour, agents run in parallel
+(hunters, verifiers, builders, appliers) to hit that hourly floor.
+Latest postings are hunted and submitted first — freshness wins; older
+live postings are used only to fill the hour when fresh roles run out.
 
-Each application is token-expensive: JD reading, multi-draft tailoring, two
-review passes, PDF build, layout verification, and form filling. The 50–70
-band keeps token usage sustainable while running serious volume, day and
-night.
+Each application is token-expensive: JD reading, multi-draft tailoring,
+two review passes, PDF build, layout verification, and form filling. The
+3–5 per hour floor keeps volume serious while staying sustainable, day
+and night.
+
+### Verification never waits for the queue (deadlock fix, v2.8.0)
+
+A weak conditional — a role that looks novel and in-fit but still needs
+a live check (own board, dated H-1B filings, experience band,
+sponsorship language, coding share) — becomes a firm keeper only after
+a live-browser verification. The coordinator must run a verification
+batch every hour on the live-looking weak conditionals, even when the
+firm-keeper queue is empty. **The "queue empty" rule must never block
+verification: verification is what fills the queue.** A coordinator that
+only hunts while the queue is empty deadlocks — it finds nothing new,
+verifies nothing, and submits nothing. Every hour: verify the queue,
+build the keepers, submit 3–5.
 
 ### Google Drive, not local disk
 
