@@ -4,6 +4,59 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.8.3 — 2026-11-12
+
+### Added
+- **Hard 7-day job-age filter.** Only jobs posted within the last 7 days
+  are applied to — anything older is skipped, no exceptions. Postings
+  from the last 24–48 hours are preferred, and each hour's ranking is
+  newest first. (Replaces the 60-minutes-to-1-month window.)
+- **No company-size bias.** Startups, early-stage, mid-size, and large
+  companies are treated equally — no size, funding, or "well-known"
+  preference. The only company requirement is the existing strict
+  sponsorship check (USCIS H-1B activity in the last 5 years or an
+  explicit sponsorship offer in the posting).
+- **Non-blocking park-and-continue.** A form question with genuine doubt,
+  or any blocker needing user input (OTP, sign-in, account creation, an
+  unknown fact), parks the application IMMEDIATELY: the exact question
+  and packet state are recorded in Drive (`parked/` under the role
+  folder, plus `parked.json` at the `job_resumes` root), and the
+  pipeline instantly moves to the next verified keeper. Never waits for
+  the user. Parked items resume only when the user replies or on the
+  next cycle, and parked applications do NOT reduce the hourly or daily
+  count. (Replaces the doubt rule's ask-and-wait behavior.)
+
+### Changed
+- **Daily volume: roughly 25–50 applications per day.** That's the
+  target, nothing more. Replaces the v2.8.1/v2.8.2 minimum-5-per-hour
+  floor (120/day). The continuous parallel pipeline is unchanged: hunt,
+  verify, build, and apply run in parallel, and a verified keeper is
+  submitted the moment it verifies; once the day's target is reached,
+  the pipeline stops submitting and keeps the queue warm for the next
+  day.
+- **Fast apply — speed over sequential reviews.** After Draft 1, the six
+  independent reviewers (ATS, hiring manager, peer, executive skim, HR
+  red-flag, AI-voice) run IN PARALLEL, never one after another. Early
+  exit: a Draft 1 covering 90%+ of the JD's top-10 keywords with no red
+  flags skips the remaining review rounds and ships. Volume mode (behind
+  the hourly or daily target): a lighter 4-reviewer parallel pass (ATS,
+  hiring manager, peer, AI-voice) + at most 1 rewrite round; ship if the
+  average score is >= 8.5 with no hard fails. The company-lens review
+  and interview vote still run in every mode.
+- **No AI bluff words — strengthened.** Plain human writing only; the
+  banned-word list stays in force. Any AI-sounding phrase, em dash,
+  triple parallelism, or hedged fluff FAILS the application and must be
+  rewritten in plain human writing before submit, no exceptions. A form
+  question that cannot be answered from verified resume + onboarding
+  facts is parked, never invented.
+
+### Fixed
+- **HOW_TO_RUN_MUSE.md now matches the instant-Drive rule.** It still
+  said unsubmitted material is removed; filed pieces stay even if the
+  application parks (v2.7.8).
+
+---
+
 ## v2.8.2 — 2026-11-11
 
 ### Changed

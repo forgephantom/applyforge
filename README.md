@@ -1,7 +1,7 @@
 # ApplyForge
 
 ![zero prompt](https://img.shields.io/badge/run-zero%20prompt-blue)
-![auto-apply](https://img.shields.io/badge/auto--apply-50--70%2Fday-green)
+![auto-apply](https://img.shields.io/badge/auto--apply-25--50%2Fday-green)
 ![runs 24 hours](https://img.shields.io/badge/runs-24%20hours-blue)
 ![runs on any agent](https://img.shields.io/badge/runs%20on-any%20agent-purple)
 ![no installs](https://img.shields.io/badge/installs-none-orange)
@@ -10,8 +10,8 @@
 extracts your roles, finds matching jobs, and for every job runs your
 resume through a **seven-reviewer quality loop** (ATS recruiter, hiring
 manager, peer engineer, executive skim, HR red-flag screen, AI-voice
-detector, company lens) plus a final **interview vote** — then applies. **50–70
-applications per day**, running 24 hours, on autopilot from the 3rd application. Your files
+detector, company lens) plus a final **interview vote** — then applies. **roughly
+25–50 applications per day**, running 24 hours, on autopilot from the 3rd application. Your files
 live in **Google Drive**, never on local disk, and this repo never holds
 your personal data.
 
@@ -40,9 +40,11 @@ You clone the repo into Muse
      (see First-run onboarding) — asked once, remembered, never stored in
      this repo
   -> Muse extracts every role from it: titles, employers, dates, skills
-  -> Muse searches jobs matching those roles: posted 60 min – 1 month ago,
-     strictly USA-wide and never narrowed to a single state — all 50 states
-     (remote, hybrid, or onsite anywhere in the USA);
+  -> Muse searches jobs matching those roles: posted within the last 7 days
+     ONLY (HARD FILTER — anything older than 7 days is skipped, no
+     exceptions; prefer postings from the last 24–48 hours; rank newest
+     first every hour), strictly USA-wide and never narrowed to a single
+     state — all 50 states (remote, hybrid, or onsite anywhere in the USA);
      LinkedIn first (main priority), then company career portals,
      then other job sites
   -> Auto-search runs every 60 minutes and applying starts on its own
@@ -50,6 +52,11 @@ You clone the repo into Muse
      record for the last 5 years through the current year (plus
      site:h1bdata.info); apply ONLY to proven sponsors — everyone else
      is skipped, no exceptions
+  -> Company size: NO bias — startups, early-stage, mid-size, and large
+     companies are treated equally. No size, funding, or "well-known"
+     preference. The only company requirement is the strict sponsorship
+     check above (USCIS H-1B last 5 years or explicit sponsorship in
+     the posting).
   -> Existing-employer check: skip any company that already appears as an
      employer in your uploaded base resume (current or past) — never apply
      to a current or former employer, no exceptions
@@ -57,17 +64,24 @@ You clone the repo into Muse
      check the shared Drive job_resumes record — if a packet for this
      company + role already exists (from ANY bot, on ANY platform), skip.
      Never apply twice to the same company + role, no exceptions
-  -> For each job: 50–70 applications per day, running 24 hours:
+  -> For each job: roughly 25–50 applications per day, running 24 hours:
        read JD -> Draft 1 (keep EVERY section from the uploaded base resume:
        Projects, Publications, Awards, whatever the candidate included — never
        drop a section; order sections by experience: under 3 yrs =
        Summary, Education, Projects, Skills, Experience; 3+ yrs =
        Summary, Experience, Skills, Projects, Education)
-       -> Review A (ATS recruiter) -> Draft 2
-       -> Review B (hiring manager) -> Draft 3
-       -> Review C (peer engineer) -> Review D (executive 6-second skim)
-       -> Review E (HR red-flag screen) -> Review F (AI-voice detector)
-       -> unanimous interview vote (all seven reviewers)
+       -> Early exit: if Draft 1 already covers 90%+ of the JD's top-10
+          keywords and has no red flags, skip the remaining review rounds
+          and ship it — never review for the sake of reviewing.
+       -> Otherwise, parallel reviews: ATS recruiter, hiring manager,
+          peer engineer, executive 6-second skim, HR red-flag screen,
+          and AI-voice detector run IN PARALLEL on Draft 1 (never one
+          after another), then one rewrite round, then the company-lens
+          review and the unanimous interview vote (all seven reviewers).
+       -> Volume mode (behind the hourly or daily target): a lighter
+          4-reviewer parallel pass (ATS, hiring manager, peer, AI-voice)
+          + at most 1 rewrite round; ship if the average score is >= 8.5
+          with no hard fails.
        -> build DOCX -> PDF -> layout MATCH check (exactly 1 page)
        -> fill application (upload the PDF resume ONLY on every portal —
           never the DOCX) -> smart form questions answered only from
@@ -224,25 +238,39 @@ genuine doubt about the truthful answer. (Muse still never invents
 employers, titles, dates, metrics, tools, salary, or work-authorization
 facts, and still strips any number it cannot verify.)
 
-### Daily volume: minimum 5 applications per hour, continuous parallel pipeline
+### Non-blocking park-and-continue (v2.8.3 — hard)
 
-The pipeline runs around the clock and submits a minimum of 5
-applications every hour, all day. Hunt, verify, build, and apply run
-in parallel, continuously — never in sequence, never waiting. The
-moment a role is verified as a firm keeper, its packet is built and
-submitted immediately; the pipeline never waits until five keepers are
-collected and never waits for a "right time" in the hour. While one
-role is being built or applied, hunters and verifiers keep working the
-next roles in parallel. Each hour picks the top 5 roles (latest
-postings first); as soon as one is submitted, the next keeper in the
-queue takes its place. If more than 5 keepers are ready in an hour,
-the top 5 are submitted and the rest carry into the next hour's queue
-— the pipeline never idles.
+A doubt or a blocker never stops the pipeline. If a form question has
+genuine doubt about the truthful answer, or any blocker needs user input
+(OTP code, sign-in, account creation, a fact only the user knows): park
+the application IMMEDIATELY, record the exact question and the packet's
+state in Drive (`parked/` under the role folder, plus `parked.json` at
+the `job_resumes` root), and instantly move to the next verified keeper.
+Never wait for the user. Parked items stay in the queue and are resumed
+only when the user replies or on the next cycle. Parked applications do
+NOT reduce the hourly or daily count — the hour's 5 must still come
+from verified submittable roles.
+
+### Daily volume: roughly 25–50 applications per day, continuous parallel pipeline
+
+The pipeline runs around the clock and submits roughly 25–50
+applications per day — that's the target, nothing more. Hunt, verify,
+build, and apply run in parallel, continuously — never in sequence,
+never waiting. The moment a role is verified as a firm keeper, its
+packet is built and submitted immediately; the pipeline never waits
+to batch roles and never waits for a "right time" in the hour. While
+one role is being built or applied, hunters and verifiers keep working
+the next roles in parallel. Each hour picks the top roles (newest
+first — only postings from the last 7 days are eligible, prefer the
+last 24–48 hours); as soon as one is submitted, the next keeper in the
+queue takes its place. Once the day's target is reached, the pipeline
+stops submitting and keeps the queue warm for the next day — the
+pipeline never idles while the target is unmet.
 
 Each application is token-expensive: JD reading, multi-draft tailoring,
-two review passes, PDF build, layout verification, and form filling. The
-5 per hour floor keeps volume serious while staying sustainable, day
-and night.
+parallel review passes, PDF build, layout verification, and form filling.
+The 25–50 per day target keeps volume serious while staying sustainable,
+day and night.
 
 ### Verification never waits for the queue (deadlock fix, v2.8.0)
 
@@ -256,7 +284,7 @@ verification: verification is what fills the queue.** A coordinator that
 only hunts while the queue is empty deadlocks — it finds nothing new,
 verifies nothing, and submits nothing. Continuously: verify the queue,
 build each keeper the moment it verifies, submit it immediately —
-minimum 5 applications per hour (v2.8.2).
+roughly 25–50 applications per day (v2.8.3).
 
 ### Google Drive, not local disk
 
@@ -270,6 +298,9 @@ batched, never held until submission:
                                to a portal)
   JD.md                         (the job description as posted)
   APPLICATION_FORM.md           (every question + the submitted answer)
+  parked/                       (if parked: the exact blocking question +
+                               packet state — see Non-blocking
+                               park-and-continue)
 ```
 
 **Instant updates.** The JD is written to Drive the moment it is read, the
@@ -378,7 +409,13 @@ the sample template renders exactly 1 page before your first real run.
 Every single application goes through this — including the auto-approved ones.
 The bar is **10/10 from every reviewer**; any score below 10 sends the draft
 back for another pass (max 3 full rounds), and nothing ships until **all seven
-reviewers vote "interview"**:
+reviewers vote "interview"**. **Fast apply (v2.8.3):** after Draft 1, the six
+independent reviewers run in parallel, never one after another. **Early
+exit:** a Draft 1 covering 90%+ of the JD's top-10 keywords with no red
+flags skips the remaining rounds and ships. **Volume mode** (behind the
+hourly or daily target): a lighter 4-reviewer parallel pass (ATS, hiring
+manager, peer, AI-voice) + at most 1 rewrite round; ship if the average
+score is >= 8.5 with no hard fails.
 
 1. **Reads the JD** — must-have skills, nice-to-haves, exact keywords,
    seniority, top responsibilities.
@@ -386,37 +423,58 @@ reviewers vote "interview"**:
    summary, skills, and bullets against the JD using your real history
    (maximum honest keyword match). The summary's first line states your
    years, lane identity, and strongest attested scale or outcome.
-3. **Review A — ATS recruiter.** Scores keyword coverage must-have by
-   must-have, scannability, parsing risks. Fixes the gaps.
-4. **Review B — hiring manager.** Scores credibility and impact. Hard
-   **impact gate**: every bullet must carry ownership, scale, or a
-   measurable outcome — duty-only bullets fail, no matter how well they
-   match keywords.
-5. **Review C — peer engineer.** Would the tooling and scale claims survive
-   a technical screen? Catches misused terms and fluff an engineer would
-   spot.
-6. **Review D — executive skim.** The 6-second test: title + summary + first
-   two bullets must say who you are and why you're strong instantly.
-7. **Review E — HR red-flag screen.** Timeline gaps, title-scope
-   consistency, level fit, verification risk.
-8. **Review F — AI-voice detector.** Scans the banned-word list and AI
-   phrasings (em dashes, "not only/but also", triple parallelisms,
-   "furthermore", uniform bullet rhythm, hedged claims like "helped with")
-   and rewrites anything that reads machine-generated.
-9. **Interview vote.** All seven reviewers vote "interview" or "no
-   interview" with a one-line reason. Any "no" triggers a targeted
-   revision and a re-vote. Dissent after 3 rounds is shown to you with the
-   reason.
-10. **Build + verify** — writes the `.docx`, converts to PDF with
-    LibreOffice, runs `compare_layout.py` against your original PDF. If
-    section headers shifted or it spilled to 2 pages, Muse trims words and
-    rebuilds until **MATCH** (identical spacing, exactly 1 page).
-11. **Apply + record** — fills the application from your verified facts,
-    submits automatically, no approval step, and saves the full packet
-    (PDF + DOCX + JD + every question/answer) to your Drive folder.
-    Resume, JD, and form are each written instantly, the moment they exist
-    (see Instant updates); filed pieces stay even if the application is
-    later parked.
+3. **Early-exit check.** If Draft 1 already covers 90%+ of the JD's
+   top-10 keywords (in context — Skills section plus at least one
+   Experience bullet each) and has no red flags (no banned words, no
+   AI phrasing, no timeline/title/level issues), skip to step 7
+   (Build + verify). Never review for the sake of reviewing.
+4. **Parallel reviews (standard mode).** Reviews A–F run IN PARALLEL on
+   Draft 1 — never one after another:
+   - **A — ATS recruiter.** Keyword coverage must-have by must-have,
+     scannability, parsing risks. Score out of 10.
+   - **B — hiring manager.** Credibility and impact. Hard **impact
+     gate**: every bullet must carry ownership, scale, or a measurable
+     outcome — duty-only bullets fail, no matter how well they match
+     keywords. Score out of 10.
+   - **C — peer engineer.** Would the tooling and scale claims survive
+     a technical screen? Catches misused terms and fluff an engineer
+     would spot. Score out of 10.
+   - **D — executive skim.** The 6-second test: title + summary + first
+     two bullets must say who you are and why you're strong instantly.
+     Score out of 10.
+   - **E — HR red-flag screen.** Timeline gaps, title-scope
+     consistency, level fit, verification risk. Score out of 10.
+   - **F — AI-voice detector.** Scans the banned-word list and AI
+     phrasings (em dashes, "not only/but also", triple parallelisms,
+     "furthermore", uniform bullet rhythm, hedged claims like "helped
+     with") and rewrites anything that reads machine-generated. Any
+     AI-sounding phrase, em dash, triple parallelism, or hedged fluff
+     FAILS the application — the flagged lines must be rewritten in
+     plain human writing before submit, no exceptions. Score out of 10.
+   One rewrite round fixes every flagged issue.
+5. **Company lens + interview vote.** Review G (company lens) reads the
+   revised draft exactly as the hiring company sees it: a 10-second fit
+   verdict, requirement-by-requirement traceability with quoted proof
+   lines, interview triggers, and company-side risks. Then all seven
+   reviewers vote "interview" or "no interview" with a one-line reason.
+   Any "no" triggers a targeted revision and a re-vote. Dissent after
+   3 rounds is shown to you with the reason.
+6. **Volume mode (behind the hourly or daily target).** A lighter
+   4-reviewer parallel pass (ATS, hiring manager, peer, AI-voice) +
+   at most 1 rewrite round. Ship if the average score is >= 8.5 with
+   no hard fails. A hard fail is any red flag, banned word, AI
+   phrasing, invented fact, duty-only bullet, or failed layout MATCH.
+   The company-lens review and interview vote still run.
+7. **Build + verify** — writes the `.docx`, converts to PDF with
+   LibreOffice, runs `compare_layout.py` against your original PDF. If
+   section headers shifted or it spilled to 2 pages, Muse trims words and
+   rebuilds until **MATCH** (identical spacing, exactly 1 page).
+8. **Apply + record** — fills the application from your verified facts,
+   submits automatically, no approval step, and saves the full packet
+   (PDF + DOCX + JD + every question/answer) to your Drive folder.
+   Resume, JD, and form are each written instantly, the moment they exist
+   (see Instant updates); filed pieces stay even if the application is
+   later parked.
 
 ### Smart form questions — answered correctly, no AI bluff words
 
@@ -427,8 +485,10 @@ plus the onboarding answers — and in plain human writing:
 
 1. **Correct first.** Every claim must trace to the resume or the
    onboarding answers: a real employer, a real project, a real number. If
-   a question cannot be answered from verified facts, park it (doubt rule)
-   — never invent a story, a metric, or a skill to fill the box.
+   a question cannot be answered from verified facts, park it immediately
+   under the non-blocking park-and-continue rule (record the exact
+   question and the packet state in Drive, move to the next keeper) —
+   never invent a story, a metric, or a skill to fill the box.
 2. **No AI bluff words.** No buzzwords from the ban list
    (`Resume_Section_Spec.md`: leverage, seamless, robust, streamline,
    spearhead, empower, holistic, synergy, utilize, foster, pivotal,
@@ -439,6 +499,9 @@ plus the onboarding answers — and in plain human writing:
    to", "it is worth noting that", "at the end of the day", "the ability
    to"), no hedged filler ("helped with", "was involved in"). Short
    sentences, plain words, straight quotes only when truly needed.
+   Any AI-sounding phrase, em dash, triple parallelism, or hedged
+   fluff FAILS the application — the answer must be rewritten in plain
+   human writing before submit, no exceptions.
 3. **Defensible in an interview.** Write every answer as if the
    interviewer will ask you to prove it on the spot — because they will.
    If you could not defend a sentence in an interview, do not write it.
@@ -456,10 +519,14 @@ Base resume (uploaded once, kept private)
   -> extracted profile: roles, employers, dates, skills
   -> job search matched to those roles
   -> per job: JD -> content rewrite (honesty rules, no fabrication)
-            -> seven-reviewer loop: ATS -> hiring manager -> peer engineer
-               -> executive skim -> HR red flags -> AI-voice detector
-               -> company lens
-            -> unanimous interview vote (10/10 bar per reviewer)
+            -> fast-apply review: early exit if Draft 1 covers 90%+ of
+               top-10 JD keywords with no red flags; otherwise six
+               reviewers IN PARALLEL (ATS, hiring manager, peer engineer,
+               executive skim, HR red flags, AI-voice detector), one
+               rewrite round, then company lens
+            -> unanimous interview vote (10/10 bar per reviewer;
+               volume mode: 4-reviewer parallel pass, ship at avg >= 8.5
+               with no hard fails)
             -> build_resume.js (docx lib: constants S_NAME..S_SK,
                helpers name/subtitle/contact/section/summary/skill/
                jobline/role/bullet/certline/eduline,
