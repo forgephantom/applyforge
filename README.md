@@ -152,24 +152,62 @@ any resume is built:
 Different bots running this repo must never apply to the same job twice.
 **Before** any resume is built:
 
-1. **One shared record.** Every bot — Muse, Grok bot, Dots, Claude Duet,
-   or any other — must point at the SAME Drive `job_resumes` folder (same
-   `OUT_BASE`). That folder is the single record of what has been applied
-   to. A bot with its own separate folder cannot see other bots'
-   applications and will duplicate them.
-2. **Check before building.** For every job, search the shared folder for
-   an existing packet for that company + role
+1. **Fetch the Excel tracker first.** Every bot — Muse, Grok bot, Dots,
+   Claude Duet, or any other — must fetch the shared
+   `applications-tracker.xlsx` from the Drive `job_resumes` root and
+   search it for the company + role + req ID. If a row exists — from any
+   bot, on any platform, on any day — **skip the job. No exceptions.**
+   If nothing is found in the sheet, apply. The sheet is the memory:
+   no bot may apply without checking it first.
+2. **One shared record.** Every bot must point at the SAME Drive
+   `job_resumes` folder (same `OUT_BASE`) and the SAME tracker sheet.
+   That folder and that sheet are the single record of what has been
+   applied to. A bot with its own separate folder or its own separate
+   sheet cannot see other bots' applications and will duplicate them.
+3. **Check the folder too.** For every job, also search the shared folder
+   for an existing packet for that company + role
    (`job_resumes/<Company>/<YYYY-MM-DD>_<Role-Slug>/`). If a packet
    exists — from any bot, on any platform, on any day — **skip the job.
-   No exceptions.**
-3. **One application per company + role, ever.** Never re-apply to the
+   No exceptions.** The sheet is the primary check; the folder is the
+   backup. Either one finding a match means skip.
+4. **One application per company + role, ever.** Never re-apply to the
    same company + role, even if the earlier application came from another
    bot, another platform, or another day. Only the user can explicitly
    order a re-application, and then it is a new decision, not an automatic
    one.
-4. **File before moving on.** Every submitted application is filed in the
-   shared folder immediately after submitting, so the next bot — or the
-   next run — sees it. Never submit without filing.
+5. **File before moving on.** Every submitted application is filed in the
+   shared folder AND added to the tracker sheet immediately after
+   submitting, so the next bot — or the next run — sees it. Never submit
+   without filing, and never submit without updating the sheet.
+
+### Application Tracker (Excel) — the single source of truth
+
+`applications-tracker.xlsx` lives at the root of the Drive `job_resumes`
+folder (and a blank template ships in this repo). It is the one record
+every bot reads before applying and every bot updates after applying.
+
+Columns:
+
+| Column | What goes in it |
+|---|---|
+| Date Applied | `YYYY-MM-DD` of the submission |
+| Company | Company name |
+| Role | Role title as posted |
+| Req ID | Req / job ID from the posting or portal |
+| Platform | Greenhouse, Lever, Ashby, Workday, iCIMS, etc. |
+| Location | City, state, or Remote |
+| Status | Submitted, Parked, Rejected, Interview |
+| Confirmation | Confirmation page text or email reference |
+| Packet Path | Local packet folder path |
+| Drive Folder | Drive folder link or ID for the packet |
+| Notes | Anything else (salary entered, special answers) |
+
+**Instant update — automatically up to date, not later.** The moment an
+application is submitted, the new row is added to the tracker sheet AND
+the packet is mirrored to the Drive folder, in the same step. There is no
+"update later" — the sheet and the Drive folder are up to date the instant
+the application lands. A submission is not complete until the sheet row
+and the Drive mirror both exist.
 
 ### Agent-agnostic rules
 
@@ -303,11 +341,17 @@ batched, never held until submission:
                                park-and-continue)
 ```
 
-**Instant updates.** The JD is written to Drive the moment it is read, the
-tailored resume the moment it is built, and the filled form the moment it
-is filled — each piece lands in Drive immediately, before submission.
-Filed pieces stay even if the application is later parked or skipped; they
-are the record of what was prepared. Nothing is deleted to make room.
+**Instant updates — automatically up to date, not later.** The JD is
+written to Drive the moment it is read, the tailored resume the moment it
+is built, and the filled form the moment it is filled — each piece lands
+in Drive immediately, before submission. The moment an application is
+submitted, the packet mirror is complete AND the new row is added to
+`applications-tracker.xlsx` at the `job_resumes` root, in the same step.
+The Drive folder and the tracker sheet are up to date the instant the
+application lands — never "later", never batched, never at the end of the
+day. A submission is not complete until both exist. Filed pieces stay
+even if the application is later parked or skipped; they are the record
+of what was prepared. Nothing is deleted to make room.
 
 Control the root with `OUT_BASE` (set during onboarding):
 
@@ -376,6 +420,9 @@ The steps are the same on every platform:
 2. Ask the agent to read every file, beginning to end.
 3. The agent starts onboarding on its own: upload your base resume, connect
    Google Drive, point at your Drive `job_resumes` folder, connect Gmail.
+   Onboarding also connects the shared `applications-tracker.xlsx` at the
+   `job_resumes` root — the agent fetches it before every application and
+   updates it after every submission.
 4. If it doesn't start, just say **"start"** — that's the only trigger
    phrase, on every platform.
 
@@ -565,6 +612,7 @@ Why it is built this way:
 | File | What it is |
 |---|---|
 | `build_resume.js` | Layout engine + sample content. Edit strings only; your real data comes from env vars or your private copy. |
+| `applications-tracker.xlsx` | Blank application tracker template. Lives at the Drive `job_resumes` root; every bot fetches it before applying and updates it the moment an application is submitted. Columns: Date Applied, Company, Role, Req ID, Platform, Location, Status, Confirmation, Packet Path, Drive Folder, Notes. |
 | `skills/jd-resume-review-loop/SKILL.md` | The seven-reviewer quality loop skill: the full review sequence, scoring rules, interview vote, and style bans. Load it into Muse (or any agent) to run the loop. |
 | `Resume_Section_Spec.md` | Content rules: sections, bullet template, honesty/ban rules. |
 | `compare_layout.py` | Layout verifier: `python3 compare_layout.py ORIG.pdf NEW.pdf`. |

@@ -4,6 +4,38 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.9.0 — 2026-11-12
+
+### Added
+- **Application Tracker (Excel) — the single source of truth.**
+  `applications-tracker.xlsx` ships in the repo and lives at the Drive
+  `job_resumes` root. Columns: Date Applied, Company, Role, Req ID,
+  Platform, Location, Status, Confirmation, Packet Path, Drive Folder,
+  Notes. Every bot reads it before applying and updates it after
+  applying.
+- **Cross-AI duplicate check via the tracker.** Before building any
+  resume, every bot — Muse, Grok bot, Dots, Claude Duet, or any other —
+  fetches the shared tracker sheet and searches it for company + role +
+  req ID. If a row exists, skip the job, no exceptions. If nothing is
+  found, apply. The sheet is the memory: no bot may apply without
+  checking it first. The Drive folder check remains as a backup; either
+  finding a match means skip.
+
+### Changed
+- **Instant update — automatically up to date, not later.** The moment
+  an application is submitted, the new row is added to the tracker
+  sheet AND the packet is mirrored to the Drive folder, in the same
+  step. The sheet and the Drive folder are up to date the instant the
+  application lands — never "later", never batched, never at the end of
+  the day. A submission is not complete until the sheet row and the
+  Drive mirror both exist.
+- **Onboarding connects the tracker.** First-run onboarding now connects
+  the shared `applications-tracker.xlsx` alongside Drive and Gmail, so
+  every bot on every platform fetches it before applying and updates it
+  after submitting.
+
+---
+
 ## v2.8.3 — 2026-11-12
 
 ### Added
