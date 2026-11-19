@@ -4,6 +4,65 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.10.0 — 2026-11-19
+
+From the 2026-11-19 ATS/decline review: measured JD keyword coverage on
+declined resumes was 10/10, identical to pending ones — ATS keywords were
+not the bottleneck. The real, fixable flaws were that ~18% of top-10 JD
+skills appeared only in the Skills list with no Experience evidence, that
+no computed ATS score existed anywhere (the loop's "match %" was reviewer
+judgment), that two gates were prose instead of numbers, and that decline
+data was never written back. This release fixes the measurement.
+
+### Added
+- **Computed ATS score (`ats_score.py`, repo root).** Takes a JD file and
+  a resume PDF (text via `pdftotext`) plus a `top10.json` skills list and
+  computes three coverage numbers against the JD's top-10 skills:
+  overall (anywhere), Skills-section, Experience-bullets. Exact-phrase
+  matching with a recorded stem/synonym map, plural- and
+  hyphen-tolerant. Writes a score JSON for the packet. Gate: exits
+  non-zero (fails) when overall is below 10/10; warns (does not fail)
+  when Experience is below 9/10, and lists Skills-only skills
+  explicitly. Verified against a real packet: 9/10 overall, matching
+  the review's hand measurement.
+- **Machine-enforced Skills + Experience rule.** The review loop skill
+  (repo copy and local sprint copy) now requires the computed score:
+  Review A reads `ats_score.py` output instead of writing a judged
+  "match %", the top-10-in-Skills-and-Experience rule is verified by
+  the script, and every packet must contain `ats_score.json` +
+  `top10.json`, with the score and the Skills-only list recorded in
+  `APPLICATION_FORM.md`.
+- **Numeric fit gates (README + HOW_TO_RUN_MUSE.md).** The 1–6 year
+  experience band and the ~25% coding cap are now numbered gates with
+  measurement methods (parse the JD's "X+ years"; estimate coding share
+  from JD duty bullets, ops automation excluded). The H-1B gate extends
+  to role level: a company that passes can still refuse sponsorship for
+  a specific role — check the JD and form for role-level refusal
+  language. A location/onsite check verifies the form conveys "open to
+  relocate" for onsite roles.
+- **Tracker schema columns (documented).** Required Years, Coding Share,
+  and Sponsorship Signal are now documented tracker columns, so
+  decline-pattern questions become answerable from records.
+- **Decline ingestion (`decline_ingest.py` + `DECLINE_INGESTION.md`).**
+  Triage Gmail decline emails into a JSON file; the script matches each
+  decline to a tracker row by company + role, sets Status to Rejected,
+  and appends the cool-down row in the same step (dry-run first,
+  idempotent, never invents a tracker row). Closes the loop the review
+  found broken (21 companies' declines missing from the cool-down file,
+  50 of 56 known declines still "Submitted" in the tracker).
+
+### Fixed
+- **Dangling references in `Resume_Section_Spec.md`.** Six citations of
+  a `Resume_Tailoring_Skill.md` that does not exist now point at the
+  real skill, `skills/jd-resume-review-loop/SKILL.md`, mapped to its
+  named rules (SUMMARY RULE, BULLET FORMULA, TOP-10 JD SKILLS, ROLE
+  MATCH, Writing style banned list).
+
+### Not in this release
+- The canonical resume template's stale "6+ years" summary line is fixed
+  in the live template (`resume-tailor/preview_bullets_v2/`, outside
+  this repo), not here — the repo ships a blank template only.
+
 ## v2.9.0 — 2026-11-12
 
 ### Added

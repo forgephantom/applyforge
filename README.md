@@ -51,7 +51,14 @@ You clone the repo into Muse
   -> Sponsorship check per company (strict): USCIS H-1B Employer Data Hub
      record for the last 5 years through the current year (plus
      site:h1bdata.info); apply ONLY to proven sponsors — everyone else
-     is skipped, no exceptions
+     is skipped, no exceptions. Then the role-level check: the JD and the
+     form must not refuse sponsorship for this specific role
+  -> Fit gates (v2.10.0, all numeric, all measured before any resume is
+     built): experience band 1–6 years required (skip if the JD minimum
+     exceeds 6, or the band floor exceeds your total years); coding cap
+     ~25% of day-to-day duties (skip if coding is the primary duty);
+     location/onsite check (onsite roles must accept relocation, and the
+     form must convey it). Record the measured values in the tracker
   -> Company size: NO bias — startups, early-stage, mid-size, and large
      companies are treated equally. No size, funding, or "well-known"
      preference. The only company requirement is the strict sponsorship
@@ -128,12 +135,58 @@ resume is built:
 2. **Apply only if** the company shows H-1B activity in that 5-year window
    or the posting explicitly offers sponsorship. Any company without it is
    skipped — no exceptions.
-3. Log the signal per application: proven sponsor (years active) / no
-   qualifying history — skipped.
+3. **Role-level check (v2.10.0):** a company that passes the gate can
+   still refuse sponsorship for a specific role. Read the JD and the
+   application form for role-level refusal language ("unable to support
+   sponsorship for this role", "no sponsorship available for this
+   position", "must be authorized to work without sponsorship"). If the
+   role refuses sponsorship, skip it even when the company sponsors
+   other roles — company-level filings do not predict role-level
+   refusal. Case study: a company with active H-1B filings declined a
+   candidate with "we are unable to support sponsorship for candidates
+   in this role" one day after submission.
+4. Log the signal per application: proven sponsor (years active) / no
+   qualifying history — skipped. Record the signal strength in the
+   tracker's Sponsorship Signal column.
 
 Your work-authorization answers stay exactly as they are — the check changes
 *which companies* get applications, never what you claim. Nothing is
 misrepresented to pass it.
+
+### Fit gates (v2.10.0 — numeric, measured before any resume is built)
+
+These gates were prose before v2.10.0, or missing entirely. Each one is
+now a number with a measurement method, and the measured values go in the
+tracker so decline patterns become answerable from records.
+
+1. **Experience band: 1–6 years required.** How to count: read the JD's
+   stated requirement ("3–5 years", "5+ years", "minimum 4 years") and
+   record the minimum and maximum in the tracker's Required Years
+   column. Skip the role if the JD minimum exceeds 6 years, or if the
+   band floor exceeds your total years of professional experience.
+   A JD with no stated years requirement passes this gate; record it
+   as "not stated".
+2. **Coding cap: ~25% of day-to-day duties.** How to estimate: count
+   the JD's duty bullets (the "What you'll do" / responsibilities
+   list). A bullet counts as coding if its primary verb is writing,
+   building, or shipping production application code (feature work,
+   services, APIs). Automation, scripting, tooling, and infrastructure
+   as code written as part of operations work do NOT count as coding.
+   Coding share = coding bullets / total duty bullets; record it in
+   the tracker's Coding Share column. Skip the role if coding is the
+   primary duty (share above ~25%, or the JD's title and summary
+   describe a software-development role). When the split is genuinely
+   unclear, record the estimate and the reasoning in the packet, and
+   treat a coding-primary reading as a skip.
+3. **Location / onsite check.** How to check: read the JD's location
+   requirement (remote, hybrid, onsite + city) and record it in the
+   tracker. For onsite roles, verify the application form conveys
+   "open to relocate" (or the equivalent the form asks) before
+   submitting — a form that never asks, and never records, relocation
+   willingness leaves the employer to assume local-only. If the JD
+   restricts to a metro the candidate cannot reach ("Bay Area only",
+   "must be local"), skip the role. Record the employer's location
+   requirement in the packet.
 
 ### Existing-employer check (before every application)
 
@@ -201,6 +254,9 @@ Columns:
 | Packet Path | Local packet folder path |
 | Drive Folder | Drive folder link or ID for the packet |
 | Notes | Anything else (salary entered, special answers) |
+| Required Years | JD's stated experience requirement, as "min-max" (e.g. `3-5`, `5+`, `not stated`) — measured by the v2.10.0 experience-band gate |
+| Coding Share | Estimated share of day-to-day duties that are production coding, as a fraction (e.g. `0.2`) — measured by the v2.10.0 coding-cap gate |
+| Sponsorship Signal | H-1B sponsorship signal strength for this application: `proven` (filings in the 5-year window), `explicit` (posting offers sponsorship), or `role-refused` (company passes but the role refuses sponsorship — do not apply) |
 
 **Instant update — automatically up to date, not later.** The moment an
 application is submitted, the new row is added to the tracker sheet AND
@@ -612,7 +668,9 @@ Why it is built this way:
 | File | What it is |
 |---|---|
 | `build_resume.js` | Layout engine + sample content. Edit strings only; your real data comes from env vars or your private copy. |
-| `applications-tracker.xlsx` | Blank application tracker template. Lives at the Drive `job_resumes` root; every bot fetches it before applying and updates it the moment an application is submitted. Columns: Date Applied, Company, Role, Req ID, Platform, Location, Status, Confirmation, Packet Path, Drive Folder, Notes. |
+| `ats_score.py` | Computed ATS score: `python3 ats_score.py --jd JD.md --pdf Resume.pdf --skills top10.json --out ats_score.json`. Measures JD top-10 coverage (overall / Skills / Experience) from the extracted PDF text. Gate: overall 10/10 to submit. |
+| `decline_ingest.py` + `DECLINE_INGESTION.md` | Decline feedback loop: triage Gmail decline emails into a JSON file, then the script sets matched tracker rows to Rejected and appends cool-down rows in the same step (dry-run first). |
+| `applications-tracker.xlsx` | Blank application tracker template. Lives at the Drive `job_resumes` root; every bot fetches it before applying and updates it the moment an application is submitted. Columns: Date Applied, Company, Role, Req ID, Platform, Location, Status, Confirmation, Packet Path, Drive Folder, Notes, Required Years, Coding Share, Sponsorship Signal. |
 | `skills/jd-resume-review-loop/SKILL.md` | The seven-reviewer quality loop skill: the full review sequence, scoring rules, interview vote, and style bans. Load it into Muse (or any agent) to run the loop. |
 | `Resume_Section_Spec.md` | Content rules: sections, bullet template, honesty/ban rules. |
 | `compare_layout.py` | Layout verifier: `python3 compare_layout.py ORIG.pdf NEW.pdf`. |

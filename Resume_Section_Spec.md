@@ -179,7 +179,7 @@ Content order within the paragraph (fixed):
 JD targets.
 - Open with the person's real role title (matched to the JD's target where truthful)
   and years of experience calculated from actual employment dates (see the
-  arithmetic rules in `Resume_Tailoring_Skill.md` Section 4b).
+  arithmetic rules in `skills/jd-resume-review-loop/SKILL.md` (SUMMARY RULE).
 - Name two to four broad technology or discipline areas the JD asks for that the
   resume genuinely supports.
 
@@ -213,7 +213,7 @@ Rules:
 - Do not start the summary with "I am" or "A" (as in "A results-driven engineer").
   Start with the role title itself: "Platform Engineer with...", "Senior
   Data Engineer with...".
-- No buzzwords (see `Resume_Tailoring_Skill.md` Section 7).
+- No buzzwords (see `skills/jd-resume-review-loop/SKILL.md`, Writing style banned list).
 
 What to write: one paragraph of 4 to 6 sentences following the fixed content
 order above, with a real metric from the resume in sentence 2.
@@ -313,7 +313,7 @@ Each job block has this structure, in this order:
   in a background check. Never invent or upgrade a title.
 
 **Lines 3+** — bullets, each following the fixed bullet template from
-`Resume_Tailoring_Skill.md` Section 4a.
+`skills/jd-resume-review-loop/SKILL.md` (BULLET FORMULA).
 
 Rules for handling non-standard career histories:
 
@@ -350,8 +350,8 @@ Rules for how many bullets per job:
 - Total bullet count across all jobs, target 12 to 18. Fewer and the resume looks
   thin; more and page-fit becomes impossible.
 
-Rules for what each bullet must contain (see `Resume_Tailoring_Skill.md` Section
-4a for the exact template):
+Rules for what each bullet must contain (see `skills/jd-resume-review-loop/SKILL.md`,
+BULLET FORMULA, for the exact template):
 - An action verb from the approved list, in past tense (or present tense for the
   current job's bullets).
 - A specific tool, platform, or system named where truthful.
@@ -590,8 +590,8 @@ any section:
 
 1. Read the person's current resume in full.
 2. Read the target JD in full.
-3. Build the JD keyword checklist (per `Resume_Tailoring_Skill.md` Section 2b).
-4. Run the role-match gate (per `Resume_Tailoring_Skill.md` Section 2). Stop and
+3. Build the JD keyword checklist (per `skills/jd-resume-review-loop/SKILL.md`, TOP-10 JD SKILLS).
+4. Run the role-match gate (per `skills/jd-resume-review-loop/SKILL.md`, ROLE MATCH). Stop and
    flag if it fails.
 5. For each section in this file (Sections 1 through 7, and 8 if applicable),
    write the content following the rules in that section.

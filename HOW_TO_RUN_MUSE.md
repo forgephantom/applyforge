@@ -36,7 +36,10 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   plus company lens (see `skills/jd-resume-review-loop/SKILL.md`) —
   requires a **unanimous interview vote** at a **10/10 bar** (volume
   mode: 4-reviewer parallel pass, ship at avg >= 8.5 with no hard
-  fails), builds with `node build_resume.js`, converts with
+  fails), measures the JD top-10 coverage with the **computed ATS
+  score** (`python3 ats_score.py --jd JD.md --pdf Resume.pdf --skills
+  top10.json --out ats_score.json`, gate: overall 10/10, score JSON
+  filed in the packet), builds with `node build_resume.js`, converts with
   `soffice --headless --convert-to pdf`, and verifies with
   `python3 compare_layout.py ORIGINAL.pdf <new pdf>` until it prints MATCH —
   trimming words (never layout numbers) if sections run long.
@@ -64,9 +67,22 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   USCIS H-1B Employer Data Hub (plus `site:h1bdata.info <Company>`) for the
   last 5 years through the current year; apply only with H-1B activity in
   that window or an explicit sponsorship offer in the posting — everyone
-  else is skipped, no exceptions. Work-authorization answers stay exactly
-  as they are — nothing gets misrepresented. Search LinkedIn first (main
-  priority), then company career portals, then other job sites.
+  else is skipped, no exceptions. **Role-level check (v2.10.0):** a
+  company that passes can still refuse sponsorship for a specific role —
+  read the JD and the form for role-level refusal language and skip the
+  role if it refuses, even when the company sponsors other roles.
+  Work-authorization answers stay exactly as they are — nothing gets
+  misrepresented. Search LinkedIn first (main priority), then company
+  career portals, then other job sites.
+- **Fit gates (v2.10.0, numeric, measured before any resume is built):**
+  **experience band 1–6 years** — parse the JD's "X+ years" requirement
+  and record it in the tracker; skip if the minimum exceeds 6 or the band
+  floor exceeds your total years. **Coding cap ~25%** — estimate coding
+  share from the JD's duty bullets (coding bullets / total duty bullets;
+  ops automation and scripting do not count as coding); skip if coding is
+  the primary duty. **Location/onsite check** — for onsite roles, verify
+  the form conveys "open to relocate" and record the employer's location
+  requirement in the packet; skip metro-restricted roles you cannot reach.
 - **No review gates (v2.8.2):** Muse never asks you to review a packet,
   resume, form, or upload before acting — no approval step, no review step,
   for any task. It builds, mirrors to Drive, uploads the PDF, and submits
