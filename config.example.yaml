@@ -1,0 +1,64 @@
+# ApplyForge user configuration — EXAMPLE. Copy this file to `config.yaml`
+# and set your own values. `config.yaml` is git-ignored and never committed.
+#
+# Every value below is an EXAMPLE for a hypothetical user, not a default
+# and not anyone's real setting. Different users target different domains
+# and hold different preferences, so no threshold in this file is a
+# recommendation — set each one to what fits you. The pipeline reads
+# `config.yaml` (your copy) and applies its values as gates; see README
+# §1 (Fit gates) for how each value is measured.
+
+# --- Fit gates -------------------------------------------------------------
+# Maximum share of a role's day-to-day duties that may be production
+# coding, as a percentage (0-100). Roles above the cap are skipped.
+# Example: 25 — an SRE-focused user might set 25; a software engineer
+# might set 80; set 100 to disable the cap entirely.
+coding_cap_pct: 25
+
+# Experience band: the years-of-experience requirement a role must fall
+# in for you to apply. Skip roles whose JD minimum exceeds max_years, or
+# whose band floor exceeds your total years of professional experience.
+# Example: 2-8 years. Set your own band.
+experience_band:
+  min_years: 2
+  max_years: 8
+
+# Domains (lanes) you target. Only roles in these lanes are considered.
+# Example: backend and platform engineering. Other users might list
+# SRE, capacity planning, data engineering, DevOps, or frontend — use
+# whatever matches your background.
+target_lanes:
+  - Backend Engineering
+  - Platform Engineering
+
+# --- Sponsorship -----------------------------------------------------------
+# Whether you need visa sponsorship. When true, the pipeline applies
+# ONLY to proven sponsors (USCIS H-1B activity in the last 5 years or an
+# explicit sponsorship offer), plus the role-level refusal check.
+# Example: false — set true if you need sponsorship.
+require_sponsorship: false
+
+# --- Location --------------------------------------------------------------
+# Where you will work. Only roles in these locations are considered.
+# Example: United States. Use country or region names, or "Remote" for
+# remote-only.
+work_locations:
+  - United States
+
+# Whether you will relocate for an onsite role. When true, onsite roles
+# are eligible and the form must convey relocation willingness.
+# Example: false — set true if you will relocate.
+willing_to_relocate: false
+
+# --- Volume and freshness --------------------------------------------------
+# Maximum confirmed applications per day. The pipeline stops submitting
+# once the day's target is reached and keeps the queue warm for the
+# next day.
+# Example: 30.
+max_applications_per_day: 30
+
+# Maximum age of a job posting, in days. Postings older than this are
+# skipped; newest first is still the ranking order.
+# Example: 14 — a shorter window (e.g. 7) keeps only the freshest
+# postings; a longer window widens the net.
+max_posting_age_days: 14

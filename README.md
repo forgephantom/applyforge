@@ -1,7 +1,7 @@
 # ApplyForge
 
 ![zero prompt](https://img.shields.io/badge/run-zero%20prompt-blue)
-![auto-apply](https://img.shields.io/badge/auto--apply-25--50%2Fday-green)
+![auto-apply](https://img.shields.io/badge/auto--apply-daily-green)
 ![runs 24 hours](https://img.shields.io/badge/runs-24%20hours-blue)
 ![runs on any agent](https://img.shields.io/badge/runs%20on-any%20agent-purple)
 ![no installs](https://img.shields.io/badge/installs-none-orange)
@@ -10,8 +10,9 @@
 extracts your roles, finds matching jobs, and for every job runs your
 resume through a **seven-reviewer quality loop** (ATS recruiter, hiring
 manager, peer engineer, executive skim, HR red-flag screen, AI-voice
-detector, company lens) plus a final **interview vote** — then applies. **roughly
-25–50 applications per day**, running 24 hours, on autopilot from the 3rd application. Your files
+detector, company lens) plus a final **interview vote** — then applies, at
+your configured daily volume (see `config.example.yaml`), running 24 hours,
+on autopilot from the 3rd application. Your files
 live in **Google Drive**, never on local disk, and this repo never holds
 your personal data.
 
@@ -40,30 +41,33 @@ You clone the repo into Muse
      (see First-run onboarding) — asked once, remembered, never stored in
      this repo
   -> Muse extracts every role from it: titles, employers, dates, skills
-  -> Muse searches jobs matching those roles: posted within the last 7 days
-     ONLY (HARD FILTER — anything older than 7 days is skipped, no
-     exceptions; prefer postings from the last 24–48 hours; rank newest
-     first every hour), strictly USA-wide and never narrowed to a single
-     state — all 50 states (remote, hybrid, or onsite anywhere in the USA);
-     LinkedIn first (main priority), then company career portals,
-     then other job sites
+  -> Muse searches jobs matching those roles: posted within your
+     configured max posting age ONLY (HARD FILTER — anything older is
+     skipped, no exceptions; prefer postings from the last 24–48 hours;
+     rank newest first every hour), in your configured work locations
+     (remote, hybrid, or onsite where you will work); LinkedIn first
+     (main priority), then company career portals, then other job sites
   -> Auto-search runs every 60 minutes and applying starts on its own
-  -> Sponsorship check per company (strict): USCIS H-1B Employer Data Hub
-     record for the last 5 years through the current year (plus
-     site:h1bdata.info); apply ONLY to proven sponsors — everyone else
-     is skipped, no exceptions. Then the role-level check: the JD and the
-     form must not refuse sponsorship for this specific role
-  -> Fit gates (v2.10.0, all numeric, all measured before any resume is
-     built): experience band 1–6 years required (skip if the JD minimum
-     exceeds 6, or the band floor exceeds your total years); coding cap
-     ~25% of day-to-day duties (skip if coding is the primary duty);
-     location/onsite check (onsite roles must accept relocation, and the
-     form must convey it). Record the measured values in the tracker
+  -> Sponsorship check per company (when your config requires
+     sponsorship): USCIS H-1B Employer Data Hub record for the last
+     5 years through the current year (plus site:h1bdata.info); apply
+     ONLY to proven sponsors — everyone else is skipped, no exceptions.
+     Then the role-level check: the JD and the form must not refuse
+     sponsorship for this specific role. If your config does not
+     require sponsorship, this check does not run.
+  -> Fit gates (v2.11.0, all numeric, all measured before any resume is
+     built, all configured in your config.yaml): experience band —
+     your configured min/max years required (skip if the JD minimum
+     exceeds your max, or the band floor exceeds your total years);
+     coding cap — your configured max share of day-to-day duties
+     (skip if the role's coding share is above it); location/onsite
+     check (onsite roles must accept relocation, and the form must
+     convey it). Record the measured values in the tracker
   -> Company size: NO bias — startups, early-stage, mid-size, and large
      companies are treated equally. No size, funding, or "well-known"
-     preference. The only company requirement is the strict sponsorship
-     check above (USCIS H-1B last 5 years or explicit sponsorship in
-     the posting).
+     preference. The only company requirement is the sponsorship
+     check above, when your config requires sponsorship (USCIS H-1B
+     last 5 years or explicit sponsorship in the posting).
   -> Existing-employer check: skip any company that already appears as an
      employer in your uploaded base resume (current or past) — never apply
      to a current or former employer, no exceptions
@@ -71,7 +75,7 @@ You clone the repo into Muse
      check the shared Drive job_resumes record — if a packet for this
      company + role already exists (from ANY bot, on ANY platform), skip.
      Never apply twice to the same company + role, no exceptions
-  -> For each job: roughly 25–50 applications per day, running 24 hours:
+  -> For each job, up to your configured daily volume, running 24 hours:
        read JD -> Draft 1 (keep EVERY section from the uploaded base resume:
        Projects, Publications, Awards, whatever the candidate included — never
        drop a section; order sections by experience: under 3 yrs =
@@ -119,13 +123,20 @@ end, then starts onboarding automatically — no prompt to paste:
 7. Muse checks your resume's **section coverage** for your experience band
    and tells you what's missing so you can reupload before the first build.
 
+Before the first search, copy `config.example.yaml` to `config.yaml` and
+set your own values — coding cap, experience band, target lanes,
+sponsorship, work locations, relocation, daily volume, max posting age.
+No threshold is hardcoded: different users target different domains.
+`config.yaml` is git-ignored, so your settings never leave your machine.
+
 Then it extracts every role from your resume and starts the apply loop. If
 Muse doesn't start on its own, just say **"start"** — that's the only
 trigger phrase, and the only thing you ever type to begin.
 
 ### Sponsorship check (before every application)
 
-Apply ONLY to companies that sponsor visas — strictly. **Before** any
+When your config requires sponsorship (`require_sponsorship: true`),
+apply ONLY to companies that sponsor visas — strictly. **Before** any
 resume is built:
 
 1. Pull the company's H-1B record from the USCIS H-1B Employer Data Hub
@@ -151,42 +162,48 @@ resume is built:
 
 Your work-authorization answers stay exactly as they are — the check changes
 *which companies* get applications, never what you claim. Nothing is
-misrepresented to pass it.
+misrepresented to pass it. If your config does not require sponsorship,
+skip this check entirely.
 
-### Fit gates (v2.10.0 — numeric, measured before any resume is built)
+### Fit gates (v2.11.0 — numeric, configured, measured before any resume is built)
 
 These gates were prose before v2.10.0, or missing entirely. Each one is
 now a number with a measurement method, and the measured values go in the
-tracker so decline patterns become answerable from records.
+tracker so decline patterns become answerable from records. Every
+threshold comes from your `config.yaml` (copy `config.example.yaml` and
+set your own values) — no threshold is hardcoded, because different
+users target different domains and hold different preferences.
 
-1. **Experience band: 1–6 years required.** How to count: read the JD's
-   stated requirement ("3–5 years", "5+ years", "minimum 4 years") and
-   record the minimum and maximum in the tracker's Required Years
-   column. Skip the role if the JD minimum exceeds 6 years, or if the
-   band floor exceeds your total years of professional experience.
-   A JD with no stated years requirement passes this gate; record it
-   as "not stated".
-2. **Coding cap: ~25% of day-to-day duties.** How to estimate: count
-   the JD's duty bullets (the "What you'll do" / responsibilities
-   list). A bullet counts as coding if its primary verb is writing,
-   building, or shipping production application code (feature work,
-   services, APIs). Automation, scripting, tooling, and infrastructure
-   as code written as part of operations work do NOT count as coding.
-   Coding share = coding bullets / total duty bullets; record it in
-   the tracker's Coding Share column. Skip the role if coding is the
-   primary duty (share above ~25%, or the JD's title and summary
-   describe a software-development role). When the split is genuinely
-   unclear, record the estimate and the reasoning in the packet, and
-   treat a coding-primary reading as a skip.
+1. **Experience band: your configured min–max years required.** How to
+   count: read the JD's stated requirement ("3–5 years", "5+ years",
+   "minimum 4 years") and record the minimum and maximum in the
+   tracker's Required Years column. Skip the role if the JD minimum
+   exceeds your configured max years, or if the band floor exceeds
+   your total years of professional experience. A JD with no stated
+   years requirement passes this gate; record it as "not stated".
+2. **Coding cap: your configured max share of day-to-day duties.** How
+   to estimate: count the JD's duty bullets (the "What you'll do" /
+   responsibilities list). A bullet counts as coding if its primary
+   verb is writing, building, or shipping production application code
+   (feature work, services, APIs). Automation, scripting, tooling, and
+   infrastructure as code written as part of operations work do NOT
+   count as coding. Coding share = coding bullets / total duty
+   bullets; record it in the tracker's Coding Share column. Skip the
+   role if the coding share is above your configured cap (or the JD's
+   title and summary describe a role outside your target lanes). When
+   the split is genuinely unclear, record the estimate and the
+   reasoning in the packet, and apply your configured cap to the
+   estimate.
 3. **Location / onsite check.** How to check: read the JD's location
    requirement (remote, hybrid, onsite + city) and record it in the
-   tracker. For onsite roles, verify the application form conveys
-   "open to relocate" (or the equivalent the form asks) before
-   submitting — a form that never asks, and never records, relocation
-   willingness leaves the employer to assume local-only. If the JD
-   restricts to a metro the candidate cannot reach ("Bay Area only",
-   "must be local"), skip the role. Record the employer's location
-   requirement in the packet.
+   tracker. Skip roles outside your configured work locations. For
+   onsite roles, if your config says you will relocate, verify the
+   application form conveys "open to relocate" (or the equivalent the
+   form asks) before submitting — a form that never asks, and never
+   records, relocation willingness leaves the employer to assume
+   local-only. If the JD restricts to a metro you cannot reach
+   ("Bay Area only", "must be local"), skip the role. Record the
+   employer's location requirement in the packet.
 
 ### Existing-employer check (before every application)
 
@@ -274,7 +291,11 @@ others) runs the same pipeline and the same checks.
 ### First-run onboarding
 
 On the first run, Muse walks you through six steps — nothing to paste,
-just answer:
+just answer. Onboarding also sets up your `config.yaml`: copy
+`config.example.yaml` and set your gates (coding cap, experience band,
+target lanes, sponsorship, work locations, relocation, daily volume,
+max posting age) before the first search — the pipeline applies your
+values, not hardcoded ones.
 
 1. **Upload your base resume.** From it, Muse extracts every role (title,
    employer, start/end dates), skills and tools per role, education,
@@ -345,26 +366,26 @@ only when the user replies or on the next cycle. Parked applications do
 NOT reduce the hourly or daily count — the hour's 5 must still come
 from verified submittable roles.
 
-### Daily volume: roughly 25–50 applications per day, continuous parallel pipeline
+### Daily volume: your configured target, continuous parallel pipeline
 
-The pipeline runs around the clock and submits roughly 25–50
-applications per day — that's the target, nothing more. Hunt, verify,
-build, and apply run in parallel, continuously — never in sequence,
-never waiting. The moment a role is verified as a firm keeper, its
-packet is built and submitted immediately; the pipeline never waits
+The pipeline runs around the clock and submits up to your configured
+`max_applications_per_day` — that's the target, nothing more. Hunt,
+verify, build, and apply run in parallel, continuously — never in
+sequence, never waiting. The moment a role is verified as a firm keeper,
+its packet is built and submitted immediately; the pipeline never waits
 to batch roles and never waits for a "right time" in the hour. While
 one role is being built or applied, hunters and verifiers keep working
 the next roles in parallel. Each hour picks the top roles (newest
-first — only postings from the last 7 days are eligible, prefer the
-last 24–48 hours); as soon as one is submitted, the next keeper in the
-queue takes its place. Once the day's target is reached, the pipeline
-stops submitting and keeps the queue warm for the next day — the
-pipeline never idles while the target is unmet.
+first — only postings within your configured max posting age are
+eligible, prefer the last 24–48 hours); as soon as one is submitted,
+the next keeper in the queue takes its place. Once the day's target
+is reached, the pipeline stops submitting and keeps the queue warm
+for the next day — the pipeline never idles while the target is unmet.
 
 Each application is token-expensive: JD reading, multi-draft tailoring,
 parallel review passes, PDF build, layout verification, and form filling.
-The 25–50 per day target keeps volume serious while staying sustainable,
-day and night.
+Your configured daily target keeps volume serious while staying
+sustainable, day and night.
 
 ### Verification never waits for the queue (deadlock fix, v2.8.0)
 
@@ -378,7 +399,7 @@ verification: verification is what fills the queue.** A coordinator that
 only hunts while the queue is empty deadlocks — it finds nothing new,
 verifies nothing, and submits nothing. Continuously: verify the queue,
 build each keeper the moment it verifies, submit it immediately —
-roughly 25–50 applications per day (v2.8.3).
+up to your configured daily volume.
 
 ### Google Drive, not local disk
 
@@ -668,6 +689,7 @@ Why it is built this way:
 | File | What it is |
 |---|---|
 | `build_resume.js` | Layout engine + sample content. Edit strings only; your real data comes from env vars or your private copy. |
+| `config.example.yaml` | Example user configuration: coding cap, experience band, target lanes, sponsorship, work locations, relocation, daily volume, max posting age. Copy to `config.yaml` (git-ignored) and set your own values — no threshold is hardcoded. |
 | `ats_score.py` | Computed ATS score: `python3 ats_score.py --jd JD.md --pdf Resume.pdf --skills top10.json --out ats_score.json`. Measures JD top-10 coverage (overall / Skills / Experience) from the extracted PDF text. Gate: overall 10/10 to submit. |
 | `decline_ingest.py` + `DECLINE_INGESTION.md` | Decline feedback loop: triage Gmail decline emails into a JSON file, then the script sets matched tracker rows to Rejected and appends cool-down rows in the same step (dry-run first). |
 | `applications-tracker.xlsx` | Blank application tracker template. Lives at the Drive `job_resumes` root; every bot fetches it before applying and updates it the moment an application is submitted. Columns: Date Applied, Company, Role, Req ID, Platform, Location, Status, Confirmation, Packet Path, Drive Folder, Notes, Required Years, Coding Share, Sponsorship Signal. |

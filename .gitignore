@@ -12,3 +12,6 @@ build_*.js
 samples_2026-10-03/
 preview_bullets_v2/
 preview_xyz/
+# Your own config holds your personal thresholds - never commit it.
+# Copy config.example.yaml to config.yaml and set your own values.
+config.yaml

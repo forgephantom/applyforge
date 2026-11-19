@@ -20,6 +20,13 @@ matching, tailored resumes, and applications.
    `CONNECTORS.md`), and your `OUT_BASE` folder. If it doesn't start on its
    own, just say **"start"**.
 
+During onboarding, Muse also sets up your `config.yaml`: copy
+`config.example.yaml` to `config.yaml` and set your own gates — coding
+cap, experience band, target lanes, sponsorship, work locations,
+relocation, daily volume, and max posting age. No threshold is
+hardcoded: different users target different domains. `config.yaml` is
+git-ignored and never committed.
+
 Muse handles dependency setup (`docx@8.5.0`, `pymupdf`, `pypdf`), the
 pinned toolchain, PDF conversion, and layout verification on its own.
 
@@ -53,36 +60,43 @@ pinned toolchain, PDF conversion, and layout verification on its own.
 
 ## The standing rules Muse follows
 
-- **Job sourcing (hard):** only jobs posted within the last 7 days —
+- **Job sourcing (hard):** only jobs posted within your configured
+  max posting age (`max_posting_age_days` in `config.yaml`) —
   anything older is skipped, no exceptions; prefer the last 24–48
-  hours; rank newest first every hour. Strictly USA-wide and never
-  narrowed to a single state — all 50 states; every listing must be
-  US-based (remote, hybrid, or onsite anywhere in the USA).
+  hours; rank newest first every hour. Only roles in your configured
+  work locations (`work_locations`); remote, hybrid, or onsite where
+  you will work.
   **Company size:** no bias — startups, early-stage, mid-size, and
   large companies equally; the only company requirement is the
   sponsorship check below. **Auto-search:** the search runs every
   60 minutes and applying starts automatically.
-  **Sponsorship check before every application (strict):** apply ONLY to
-  companies that sponsor visas. Pull the company's H-1B record from the
-  USCIS H-1B Employer Data Hub (plus `site:h1bdata.info <Company>`) for the
-  last 5 years through the current year; apply only with H-1B activity in
-  that window or an explicit sponsorship offer in the posting — everyone
-  else is skipped, no exceptions. **Role-level check (v2.10.0):** a
-  company that passes can still refuse sponsorship for a specific role —
-  read the JD and the form for role-level refusal language and skip the
-  role if it refuses, even when the company sponsors other roles.
-  Work-authorization answers stay exactly as they are — nothing gets
-  misrepresented. Search LinkedIn first (main priority), then company
-  career portals, then other job sites.
-- **Fit gates (v2.10.0, numeric, measured before any resume is built):**
-  **experience band 1–6 years** — parse the JD's "X+ years" requirement
-  and record it in the tracker; skip if the minimum exceeds 6 or the band
-  floor exceeds your total years. **Coding cap ~25%** — estimate coding
-  share from the JD's duty bullets (coding bullets / total duty bullets;
-  ops automation and scripting do not count as coding); skip if coding is
-  the primary duty. **Location/onsite check** — for onsite roles, verify
-  the form conveys "open to relocate" and record the employer's location
-  requirement in the packet; skip metro-restricted roles you cannot reach.
+  **Sponsorship check before every application (strict, when your
+  config requires sponsorship):** apply ONLY to companies that
+  sponsor visas. Pull the company's H-1B record from the USCIS H-1B
+  Employer Data Hub (plus `site:h1bdata.info <Company>`) for the last
+  5 years through the current year; apply only with H-1B activity in
+  that window or an explicit sponsorship offer in the posting —
+  everyone else is skipped, no exceptions. **Role-level check
+  (v2.10.0):** a company that passes can still refuse sponsorship for
+  a specific role — read the JD and the form for role-level refusal
+  language and skip the role if it refuses, even when the company
+  sponsors other roles. Work-authorization answers stay exactly as
+  they are — nothing gets misrepresented. If your config does not
+  require sponsorship, this check does not run. Search LinkedIn first
+  (main priority), then company career portals, then other job sites.
+- **Fit gates (v2.11.0, numeric, configured in `config.yaml`, measured
+  before any resume is built):** **experience band** (your configured
+  min/max years) — parse the JD's "X+ years" requirement and record it
+  in the tracker; skip if the minimum exceeds your configured max or
+  the band floor exceeds your total years. **Coding cap** (your
+  configured max share) — estimate coding share from the JD's duty
+  bullets (coding bullets / total duty bullets; ops automation and
+  scripting do not count as coding); skip if the share is above your
+  configured cap. **Location/onsite check** — skip roles outside your
+  configured work locations; for onsite roles, if your config says you
+  will relocate, verify the form conveys "open to relocate" and record
+  the employer's location requirement in the packet; skip
+  metro-restricted roles you cannot reach.
 - **No review gates (v2.8.2):** Muse never asks you to review a packet,
   resume, form, or upload before acting — no approval step, no review step,
   for any task. It builds, mirrors to Drive, uploads the PDF, and submits
@@ -93,11 +107,11 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   where there is genuine doubt about the truthful answer — and a doubted
   question never blocks the pipeline: it parks immediately under the
   non-blocking park-and-continue rule below.
-- **Volume:** roughly 25–50 confirmed applications per day — that's the
-  target, nothing more — running 24 hours. The search re-runs every 60
-  minutes and applying starts on its own. Each one is token-heavy: JD
-  reading, multi-draft tailoring, parallel review passes + interview
-  vote, build, verify, form fill.
+- **Volume:** up to your configured `max_applications_per_day` confirmed
+  applications per day — that's the target, nothing more — running 24
+  hours. The search re-runs every 60 minutes and applying starts on its
+  own. Each one is token-heavy: JD reading, multi-draft tailoring,
+  parallel review passes + interview vote, build, verify, form fill.
 - **Honesty gate:** role titles, employers, dates, metrics, and skills must
   be real and defensible. Disputed numbers are stripped, never shipped.
 - **Screening-answer truth check (hard, 2026-10-09):** when a form asks a

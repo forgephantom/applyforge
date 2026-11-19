@@ -4,6 +4,63 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.11.0 — 2026-11-19
+
+Two user directives, one release: thresholds must be user configuration,
+not hardcoded numbers — different users target different domains — and
+no personal information belongs in this repo.
+
+### Added
+- **User configuration (`config.example.yaml`, repo root).** Every
+  user-specific threshold is now a config value: `coding_cap_pct`,
+  `experience_band` (min/max years), `target_lanes`, `require_sponsorship`,
+  `work_locations`, `willing_to_relocate`, `max_applications_per_day`,
+  and `max_posting_age_days`. Every value in the example file is a
+  clearly-marked example, never a recommendation — copy it to
+  `config.yaml` and set your own. `config.yaml` is git-ignored and
+  never committed. The measurement methods are unchanged (coding share
+  from JD duty bullets, years parsed from the JD); only the thresholds
+  moved out of the docs and into the user's config.
+- **Config setup in onboarding.** README §1 and HOW_TO_RUN_MUSE.md now
+  tell new users to copy `config.example.yaml` to `config.yaml` and set
+  their gates before the first search.
+
+### Changed
+- **README + HOW_TO_RUN_MUSE.md: no hardcoded thresholds.** The coding
+  cap, experience band, daily volume, max posting age, sponsorship
+  requirement, and work locations are now references to the user's
+  config throughout. The sponsorship check runs only when the user's
+  config requires sponsorship; the fit gates compare measured values
+  against the user's configured caps. The auto-apply badge is now a
+  generic daily badge.
+- **Review-loop skill: target lanes from config.** The title-descriptor
+  table keeps its common infrastructure lanes, and now notes that the
+  user's target lanes come from `config.yaml`, with guidance for lanes
+  not in the table.
+
+### Removed (de-personalization audit)
+- **No personal information in this repo.** A full-repo audit removed
+  every trace of the original user's personal data that had leaked
+  into the public files:
+  - `skills/jd-resume-review-loop/SKILL.md`: employer-to-domain
+    attribution, per-employer job titles, and the user's own metrics
+    are gone; the rules (attribute skills to the employer where gained,
+    one title per employer, never hollow out quantified claims) are
+    preserved in generic form with placeholder examples.
+  - `build_resume.js`: the skill inventory and every Experience bullet
+    were the user's real resume content with real metrics. All of it
+    is now clearly-fake placeholder content in the blank-template
+    pattern (`[N]%`, `[N]` counts, generic example tools) — the file's
+    "blank template" header comment is now actually true.
+  - `decline_ingest.py` + `DECLINE_INGESTION.md`: the example declines
+    JSON carried a real req ID and a real Gmail message ID. Both are
+    now obviously-fake placeholders.
+- **Intentional divergence (note).** The repo skill is now generic;
+  a user's local copy (e.g. `~/workspace/custom-skills/`) may still
+  carry their own values — that is correct and expected. The two
+  copies are no longer kept in sync; the repo copy is the generic
+  one, the local copy is the personal one.
+
 ## v2.10.0 — 2026-11-19
 
 From the 2026-11-19 ATS/decline review: measured JD keyword coverage on

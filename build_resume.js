@@ -114,39 +114,36 @@ const doc=new Document({
       summary('Sample Role with X+ years planning production infrastructure and data center capacity across [cloud platforms]. Own capacity planning, forecasting, and FinOps for [N] applications and [N] servers, improving utilization [N]% and cutting TCO while holding performance. Build fleet health reporting in Python and SQL with [BI tools], tracking utilization, failures, lifecycle for refresh and decommissioning. Turn ambiguous demand into structured plans, partnering independently across Engineering, Finance, Supply Chain on roadmaps and recommendations for senior leadership, using GenAI/AI tools for reporting.'),
 
       section('TECHNICAL SKILLS'),
-      // ---- EDIT ME: keep labels, list only tools you have actually used ----
-      skill('Languages & Automation','Python, Java, Bash, PowerShell, YAML, SQL, Git'),
-      skill('AI & ML','Prompt engineering, LLM benchmarking & evaluation, ML-based forecasting & anomaly detection, ML/GPU capacity planning, GitHub Copilot, deterministic rule-based logic'),
-      skill('Software Engineering','Object-Oriented Design, Design Patterns, Multithreading, JVM Tuning, SDLC, Code Reviews, REST APIs, Microservices'),
-      skill('Program & Reliability','Program Management, Technical Program Management, Cross-Functional Coordination, Capacity Planning, Resource Allocation, Long-Range Forecasting, Incident Command, RCA & Postmortems, SLI/SLO & Error Budgets, DR/HA, Change Management, Stakeholder Management'),
-      skill('Data & Messaging','SQL, MySQL, PostgreSQL, Kafka, Redis, MongoDB, IBM MQ, Excel, XML/CSV transformation'),
-      skill('Containers & Cloud','Kubernetes (EKS/AKS/GKE), OpenShift, Docker, Helm, ArgoCD, AWS, Azure, GCP, On-Prem/PCF'),
-      skill('Systems & Networking','Linux (RHEL), Windows Server, Filesystems, Disk/Storage, TCP/IP, DNS, NGINX, Firewalls, VPN'),
-      skill('IaC, CI/CD & Tools','Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Azure DevOps, Bitbucket, Jira, Confluence'),
-      skill('Monitoring & Analytics','Prometheus, Grafana, Splunk, ELK, AppDynamics, Dynatrace, CloudWatch, OpenTelemetry, Alertmanager, Data analytics & reporting platforms (Power BI, Tableau, SSRS), P95 utilization & threshold analysis'),
-      skill('Testing & Performance','Load, Chaos & Synthetic Testing, Benchmarking, JMeter, SAR, PerfMon, Right-Sizing, Cost Optimization (FinOps), Autoscaling'),
+      // ---- EDIT ME: example categories only — replace with your own
+      // categories and list only tools you have actually used ----
+      skill('Languages','Python, Java, Go, Bash, SQL'),
+      skill('Cloud & Containers','AWS, Kubernetes, Docker, Terraform'),
+      skill('Observability','Prometheus, Grafana, Splunk, Datadog'),
+      skill('Data & Messaging','PostgreSQL, Kafka, Redis'),
+      skill('CI/CD & Automation','Jenkins, GitHub Actions, Ansible'),
+      skill('Practices','Incident Response, SLI/SLO & Error Budgets, Capacity Planning, Postmortems'),
 
       section('PROFESSIONAL EXPERIENCE'),
 
       // ---- EDIT ME: real employers, real titles, real metrics ----
       jobline('Example Corp','Austin, TX','Jan 2023 - Present'),
       role('Sample Title | Sample Title II'),
-      bullet('Planned and scaled server, storage, and network capacity',' across multi-site and containerized (Docker, OpenShift/Kubernetes) environments, informing multi-year fleet refresh plans and cutting capacity incidents 20% under growing demand.'),
-      bullet('Owned capacity planning and forecasting for 25+ applications',' driving resource allocation and right-sizing that improved utilization 15% and cut total cost of ownership, with Python/SQL and GenAI-assisted tooling.'),
-      bullet('Monitored utilization across 1,000+ data center servers',' (Linux, Windows, MSSQL, grid-compute, OpenShift/Kubernetes) via Grafana, Splunk, Power BI, and Tableau, finding 90-95% of database-tier breaches were memory-driven across 2 regions.'),
-      bullet('Led a cross-functional reporting program across 8 teams',' managing the initiative end to end to 97% accuracy after benchmarking AI models, building roadmaps and business cases with engineering and finance stakeholders on analytics platforms (Power BI, Tableau, Grafana) that contributed to 500+ governance attestations.'),
-      bullet('Built automation that cut operational toil',' with single-command multi-application batch execution and per-item failure handling, saving ~1,500 hours of manual updates, version-controlled in Git with documentation in Confluence, plus dashboards tracking review status, breach counts, approvals, and overdue items.'),
+      bullet('Planned and scaled server, storage, and network capacity',' across multi-site and containerized environments, informing multi-year fleet refresh plans and cutting capacity incidents [N]% under growing demand.'),
+      bullet('Owned capacity planning and forecasting for [N] applications',' driving resource allocation and right-sizing that improved utilization [N]% and cut total cost of ownership, with Python/SQL tooling.'),
+      bullet('Monitored utilization across [N] data center servers',' via Grafana, Splunk, and Power BI, finding [N]% of database-tier breaches were memory-driven across [N] regions.'),
+      bullet('Led a cross-functional reporting program across [N] teams',' managing the initiative end to end to [N]% accuracy after benchmarking AI models, building roadmaps and business cases with engineering and finance stakeholders.'),
+      bullet('Built automation that cut operational toil',' with single-command multi-application batch execution and per-item failure handling, saving ~[N] hours of manual updates, version-controlled in Git with documentation in Confluence, plus dashboards tracking review status, breach counts, and approvals.'),
 
       jobline('Example Health','Denver, CO','Mar 2021 - Dec 2022'),
       role('Sample Engineer'),
-      bullet('Led incident response, root cause analysis, and postmortems',' on a 24/7 on-call rotation across Java, .NET, and batch workloads on AWS EKS, Azure AKS, GCP, and on-prem, cutting MTTR 30% with sustainable on-call practices.'),
-      bullet('Improved monitoring, logging, and alerting systems',' with SLIs/SLOs and error budgets in Grafana, Prometheus, Splunk, and Dynatrace, catching CPU, memory, and latency issues with gap detection before they reached users.'),
-      bullet('Built capacity forecasting and tuned Kubernetes autoscaling',' (HPA/VPA/Cluster Autoscaler) to prevent CPU throttling and memory leaks, improving app stability 25%, and ran JMeter load and chaos tests with benchmarking for zero Sev-1 escalations, deploying microservices in Docker with Kafka and Redis.'),
-      bullet('Managed CI/CD pipelines for distributed systems',' (GitHub Actions, Azure DevOps, Jenkins), cutting deployment time 35% and operational toil across multi-environment releases with runbooks and postmortems in Confluence/Jira.'),
+      bullet('Led incident response, root cause analysis, and postmortems',' on a 24/7 on-call rotation across Java and .NET workloads on AWS EKS and Azure AKS, cutting MTTR [N]% with sustainable on-call practices.'),
+      bullet('Improved monitoring, logging, and alerting systems',' with SLIs/SLOs and error budgets in Grafana, Prometheus, and Splunk, catching CPU, memory, and latency issues with gap detection before they reached users.'),
+      bullet('Built capacity forecasting and tuned Kubernetes autoscaling',' (HPA/VPA/Cluster Autoscaler) to prevent CPU throttling and memory leaks, improving app stability [N]%, and ran JMeter load and chaos tests with benchmarking, deploying microservices in Docker with Kafka and Redis.'),
+      bullet('Managed CI/CD pipelines for distributed systems',' (GitHub Actions, Azure DevOps, Jenkins), cutting deployment time [N]% and operational toil across multi-environment releases with runbooks and postmortems in Confluence/Jira.'),
 
       jobline('Example Services','Remote','Jun 2020 - Feb 2021'),
       role('Associate Engineer'),
-      bullet('Supported disaster recovery and high availability',' deploying, patching, and hardening RHEL and Windows Server to baselines, automating backups and scripts with PowerShell and Bash, and building early-warning monitoring (SAR, PerfMon) for capacity planning across DNS, load balancing, firewall, and VPN operations.'),
+      bullet('Supported disaster recovery and high availability',' deploying, patching, and hardening RHEL and Windows Server to baselines, automating backups and scripts with PowerShell and Bash, and building early-warning monitoring for capacity planning across DNS, load balancing, firewall, and VPN operations.'),
 
       jobline('Example Tech','Remote','Jan 2019 - May 2020'),
       role('Junior Engineer'),

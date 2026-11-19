@@ -34,8 +34,8 @@ together. Never update one without the other.
        "role": "Senior Site Reliability Engineer",
        "declined_date": "2026-11-18",
        "applied_date": "2026-11-16",
-       "req_id": "GH 8259621",
-       "source": "Gmail 1a1efeca21d16d69",
+       "req_id": "GH 0000000",
+       "source": "Gmail <message-id>",
        "reason": "other candidates"
      }
    ]
