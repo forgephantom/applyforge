@@ -45,8 +45,9 @@ pinned toolchain, PDF conversion, and layout verification on its own.
   mode: 4-reviewer parallel pass, ship at avg >= 8.5 with no hard
   fails), measures the JD top-10 coverage with the **computed ATS
   score** (`python3 ats_score.py --jd JD.md --pdf Resume.pdf --skills
-  top10.json --out ats_score.json`, gate: overall 10/10, score JSON
-  filed in the packet), builds with `node build_resume.js`, converts with
+  top10.json --out ats_score.json`, gate: overall and Experience 10/10
+  on all non-omitted skills, score JSON filed in the packet), builds
+  with `node build_resume.js`, converts with
   `soffice --headless --convert-to pdf`, and verifies with
   `python3 compare_layout.py ORIGINAL.pdf <new pdf>` until it prints MATCH —
   trimming words (never layout numbers) if sections run long.

@@ -4,6 +4,31 @@ All notable changes to ApplyForge. Versions follow semver: `vMAJOR.MINOR.PATCH`.
 
 ---
 
+## v2.12.0 — 2026-11-19
+
+Work history must match skills at 100%: the Experience warning is now a
+hard gate, and honest omissions are explicit instead of silent.
+
+### Changed
+- **Experience coverage is a hard gate (`ats_score.py`).** Submission
+  now requires overall 10/10 AND Experience 10/10 on all non-omitted
+  skills. The 2026-11-19 review found ~18% of top-10 skills appeared
+  only in the Skills list with no Experience bullet; v2.10.0 warned
+  about that, v2.12.0 fails the build. When the gate fails, the tailor
+  first rewrites bullets to surface real experience — never fabricates
+  a skill into a bullet.
+- **Honest omissions (`top10.json`).** A top-10 skill with genuinely no
+  honest Experience evidence may be excluded from scoring with a
+  documented reason (`{"name": "...", "omission_reason": "..."}`).
+  Omitted skills are excluded from both denominators, listed with their
+  reasons in `ats_score.json`, and must be recorded in the packet's
+  `APPLICATION_FORM.md`. An omission without a non-empty reason is a
+  script error (exit 2); omissions are never silent.
+
+### Docs
+- `skills/jd-resume-review-loop/SKILL.md`, README, and
+  HOW_TO_RUN_MUSE.md updated to the new gate rule.
+
 ## v2.11.0 — 2026-11-19
 
 Two user directives, one release: thresholds must be user configuration,

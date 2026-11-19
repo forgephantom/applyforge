@@ -18,6 +18,11 @@ Inputs:
               A list of strings, or objects with aliases:
                   ["Capacity planning", {"name": "BigQuery / SQL",
                    "aliases": ["BigQuery", "SQL"]}]
+              An object may also carry "omission_reason" to exclude the
+              skill from scoring (see Gate, below):
+                  {"name": "OpenCode AI",
+                   "omission_reason": "Employer-internal tool; no honest
+                    experience available"}
               The skills file is the human-readable override list for the
               packet: the agent extracts the top 10 from the JD first, then
               this script verifies presence. Keep the file in the packet.
@@ -35,15 +40,20 @@ optional plural "s" on the final word, and hyphen-insensitive matching
 Aliases and the SYNONYMS map below count as the skill.
 
 Gate (see skills/jd-resume-review-loop/SKILL.md):
-    exit 0  overall is 10/10 — the submission gate passes.
-    exit 1  overall is below 10/10 — the gate FAILS. Add the missing skill
-            with a truthful Experience anchor, or record it as a named
-            honest gap in the packet; a missing skill with no gap record
-            blocks submission.
-    A warning (not a failure) is printed when Experience is below 9/10:
-    skills present only in the Skills list with no bullet evidence fail
-    human credibility review even though an ATS parser matches them.
-    Those Skills-only skills are listed explicitly in the report and JSON.
+    exit 0  overall AND Experience are 10/10 on every scored skill — the
+            submission gate passes. Work history must match skills at
+            100%, not just the Skills list.
+    exit 1  overall or Experience is below 10/10 on the scored skills —
+            the gate FAILS. First rewrite bullets to surface real
+            experience the candidate has; never fabricate a skill into
+            a bullet.
+    Honest omissions: a top-10 skill with genuinely no honest Experience
+    evidence may be excluded from scoring, but ONLY with a documented
+    reason, as a top10.json entry carrying "omission_reason" (see above).
+    Omitted skills are excluded from both denominators and listed with
+    their reasons in the score JSON; they must also be recorded in the
+    packet's APPLICATION_FORM.md. Omitted skills are never silent, and
+    an omission without a non-empty reason is an error (exit 2).
 """
 
 import argparse
@@ -262,6 +272,31 @@ def main():
               "(the JD top 10). Scoring against the list as given.",
               file=sys.stderr)
 
+    # Split out honest omissions: excluded from scoring, never silent.
+    scored, omissions = [], []
+    for entry in skills:
+        if isinstance(entry, dict) and "omission_reason" in entry:
+            name = entry.get("name")
+            reason = entry.get("omission_reason")
+            if not name:
+                print("ERROR: an omitted skill has no \"name\".",
+                      file=sys.stderr)
+                sys.exit(2)
+            if not isinstance(reason, str) or not reason.strip():
+                print(f"ERROR: omitted skill {name!r} has an "
+                      "omission_reason that is missing or empty. An "
+                      "omission needs a documented reason.",
+                      file=sys.stderr)
+                sys.exit(2)
+            omissions.append({"skill": name,
+                              "omission_reason": reason.strip()})
+        else:
+            scored.append(entry)
+    if not scored:
+        print("ERROR: every listed skill is omitted; nothing left to score.",
+              file=sys.stderr)
+        sys.exit(2)
+
     resume_text = extract_pdf_text(args.pdf)
     try:
         sections = split_sections(resume_text)
@@ -269,7 +304,7 @@ def main():
         print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(2)
 
-    per_skill = score(jd_text, resume_text, sections, skills)
+    per_skill = score(jd_text, resume_text, sections, scored)
     total = len(per_skill)
     n_overall = sum(1 for s in per_skill if s["overall"])
     n_skills = sum(1 for s in per_skill if s["skills_section"])
@@ -282,7 +317,9 @@ def main():
         "jd": args.jd,
         "pdf": args.pdf,
         "date": date.today().isoformat(),
-        "total_skills": total,
+        "total_skills": len(skills),
+        "scored_skills": total,
+        "omissions": omissions,
         "overall": {"matched": n_overall, "total": total},
         "skills_section": {"matched": n_skills, "total": total},
         "experience": {"matched": n_exp, "total": total},
@@ -307,6 +344,10 @@ def main():
               + (f"  (matched: {s['matched_term']})"
                  if s["matched_term"] and s["matched_term"] != s["skill"] else ""))
     print("  (columns: Overall / Skills / Experience)")
+    if omissions:
+        for o in omissions:
+            print(f"  OMITTED (documented, excluded from scoring): "
+                  f"{o['skill']} — {o['omission_reason']}")
     if missing:
         print(f"  MISSING overall: {', '.join(missing)}")
     if skills_only:
@@ -314,16 +355,22 @@ def main():
     if not_in_jd:
         print(f"  WARNING: listed skill(s) not found in the JD text: "
               f"{', '.join(not_in_jd)}")
-    if n_exp < total - 1:
-        print(f"  WARNING: Experience coverage {n_exp}/{total} is below "
-              f"{total - 1}/{total}. Skills-only keywords pass an ATS "
-              "parser but fail human credibility review.")
-    if n_overall < total:
-        print(f"  GATE FAILED: overall {n_overall}/{total} < {total}/{total}. "
-              "Add the missing skill(s) with a truthful Experience anchor, "
-              "or record each as a named honest gap in the packet.")
+    if n_overall < total or n_exp < total:
+        failed = []
+        if n_overall < total:
+            failed.append(f"overall {n_overall}/{total}")
+        if n_exp < total:
+            failed.append(f"Experience {n_exp}/{total}")
+        print(f"  GATE FAILED: {' and '.join(failed)} < {total}/{total}. "
+              "First rewrite bullets to surface real experience; a skill "
+              "with genuinely no honest Experience evidence is recorded "
+              "as an honest omission with a reason — never fabricated "
+              "into a bullet.")
         sys.exit(1)
-    print("  GATE PASSED: overall 10/10.")
+    omitted_note = (f" ({len(omissions)} documented omission(s))"
+                    if omissions else "")
+    print(f"  GATE PASSED: overall and Experience {total}/{total} on all "
+          f"scored skills{omitted_note}.")
     sys.exit(0)
 
 
